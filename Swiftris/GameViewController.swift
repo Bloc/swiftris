@@ -1,51 +1,32 @@
-//
-//  GameViewController.swift
-//  Swiftris
-//
-//  Created by Stanley Idesis on 7/8/14.
-//  Copyright (c) 2014 Bloc. All rights reserved.
-//
-
 import UIKit
 import SpriteKit
 
-extension SKNode {
-    class func unarchiveFromFile(file : NSString) -> SKNode? {
-        
-        let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks")
-        
-        var sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
-        var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
-        
-        archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-        let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
-        archiver.finishDecoding()
-        return scene
-    }
-}
-
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, SwiftrisDelegate {
+    var scene: GameScene!
+    var swiftris:Swiftris!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
-            // Configure the view.
-            let skView = self.view as SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            
-            skView.presentScene(scene)
-        }
+        
+        // Configure the view.
+        let skView = view as SKView
+        skView.multipleTouchEnabled = false
+        
+        // Create and configure the scene.
+        scene = GameScene(size: skView.bounds.size)
+        scene.scaleMode = .AspectFill
+        scene.tick = didTick
+        
+        swiftris = Swiftris()
+        swiftris.delegate = self
+        swiftris.beginGame()
+        scene.addSpritesForShape(swiftris.fallingShape!)
+        
+        // Present the scene.
+        skView.presentScene(scene)
     }
-
-    override func shouldAutorotate() -> Bool {
+    
+    override func prefersStatusBarHidden() -> Bool {
         return true
     }
 
@@ -60,6 +41,18 @@ class GameViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
+    }
+    
+    func didTick() {
+        swiftris.letShapeFall()
+        self.view.userInteractionEnabled = false
+        scene.redrawShape(swiftris.fallingShape!) {
+            self.view.userInteractionEnabled = true
+        }
+    }
+    
+    func gameDidEnd(swiftris: Swiftris) {
+        
     }
     
 }

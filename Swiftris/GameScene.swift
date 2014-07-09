@@ -9,37 +9,79 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+    let TickLengthMillis = NSTimeInterval(600)
+    let BlockSize:CGFloat = 16.0
+    
+    let gameLayer = SKNode()
+    let shapeLayer = SKNode()
+    
+    var tick:(() -> ())?
+    
+    var swiftris:Swiftris!
+    
+    var lastTick:NSDate?
+    
+    init(size: CGSize) {
+        super.init(size: size)
         
-        self.addChild(myLabel)
+        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
+        let background = SKSpriteNode(imageNamed: "Background")
+        addChild(background)
+        
+        addChild(gameLayer)
+        
+        let layerPosition = CGPoint(
+            x: -BlockSize * CGFloat(NumColumns) / 2,
+            y: -BlockSize * CGFloat(NumRows) / 2)
+        
+        shapeLayer.position = layerPosition
+        gameLayer.addChild(shapeLayer)
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
-        
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        if lastTick == nil {
+            lastTick = NSDate.date()
+        } else {
+            var timePassed = lastTick!.timeIntervalSinceNow * -1000.0
+            if timePassed > TickLengthMillis {
+                lastTick = NSDate.date()
+                tick?()
+            }
+        }
+    }
+    
+    func addSpritesForShape(shape:Shape) {
+        for block in shape.blocks {
+            let sprite = SKSpriteNode(imageNamed: block.spriteName)
+            sprite.position = pointForColumn(block.column, row:block.row)
+            shapeLayer.addChild(sprite)
+            block.sprite = sprite
+        }
+    }
+    
+    func pointForColumn(column: Int, row: Int) -> CGPoint {
+        let x: CGFloat = (CGFloat(column) * BlockSize) + (BlockSize / 2)
+        let y: CGFloat = (CGFloat(row) * BlockSize) + (BlockSize / 2)
+        return CGPointMake(x, y)
+    }
+    
+    func redrawShape(shape:Shape, completion:() -> ()) {
+        for (idx, block) in enumerate(shape.blocks) {
+            let sprite = block.sprite!
+            let moveTo = pointForColumn(block.column, row:block.row)
+            let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
+            moveToAction.timingMode = .EaseOut
+            if idx == 0 {
+                sprite.runAction(moveToAction, completion)
+            } else {
+                sprite.runAction(moveToAction)
+            }
+        }
     }
 }
