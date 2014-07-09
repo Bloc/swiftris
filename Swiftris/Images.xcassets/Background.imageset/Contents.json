@@ -1,9 +1,16 @@
 {
   "images" : [
     {
+      "idiom" : "universal"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Background@2x.png"
+      "filename" : "Background.png"
     }
   ],
   "info" : {

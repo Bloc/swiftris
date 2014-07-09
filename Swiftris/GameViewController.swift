@@ -20,7 +20,6 @@ class GameViewController: UIViewController, SwiftrisDelegate {
         swiftris = Swiftris()
         swiftris.delegate = self
         swiftris.beginGame()
-        scene.addSpritesForShape(swiftris.fallingShape!)
         
         // Present the scene.
         skView.presentScene(scene)
@@ -45,14 +44,28 @@ class GameViewController: UIViewController, SwiftrisDelegate {
     
     func didTick() {
         swiftris.letShapeFall()
-        self.view.userInteractionEnabled = false
-        scene.redrawShape(swiftris.fallingShape!) {
-            self.view.userInteractionEnabled = true
+        scene.redrawShape(swiftris.fallingShape!) {}
+    }
+    
+    func gameDidBegin(swiftris: Swiftris, newShape: Shape) {
+        scene.addShapeToScene(newShape) {
+            self.didTick()
+            self.scene.startTicking()
         }
     }
     
     func gameDidEnd(swiftris: Swiftris) {
         
+    }
+    
+    func gamePieceDidLand(swiftris: Swiftris, landedShape: Shape) {
+        scene.redrawShape(landedShape) {
+            self.swiftris.settleShape()
+            // Check for lines made?
+            self.swiftris.newShape()
+            self.scene.addShapeToScene(swiftris.fallingShape!) {}
+            self.scene.startTicking()
+        }
     }
     
 }

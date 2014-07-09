@@ -11,7 +11,7 @@ import Foundation
 class Array2D<T> {
     let columns: Int
     let rows: Int
-    let array: Array<T?>
+    var array: Array<T?>
     
     init(columns: Int, rows: Int) {
         self.columns = columns

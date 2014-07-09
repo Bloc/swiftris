@@ -6,11 +6,12 @@ let StartingRow:Int = NumRows - 1
 
 protocol SwiftrisDelegate {
     func gameDidEnd(swiftris: Swiftris)
-    
+    func gameDidBegin(swiftris: Swiftris, newShape:Shape)
+    func gamePieceDidLand(swiftris: Swiftris, landedShape:Shape)
 }
 
 class Swiftris {
-    let shapes:Set<Shape> = Set<Shape>()
+    var blockArray:Array2D<Block?>
     
     var fallingShape:Shape?
     
@@ -20,28 +21,65 @@ class Swiftris {
     
     init() {
         fallingShape = nil
+        blockArray = Array2D<Block?>(columns: NumColumns, rows: NumRows)
     }
     
     func beginGame() {
         fallingShape = newShape()
+        delegate?.gameDidBegin(self, newShape:fallingShape!)
     }
     
     func newShape() -> Shape {
-        var newShape = Shape.random(StartingRow, startingCol: StartingColumn)
-        shapes.addElement(newShape)
-        if detectCollision() {
-            shapes.removeElement(newShape)
+        fallingShape = nil
+        fallingShape = Shape.random(StartingRow, startingCol: StartingColumn)
+        if detectOverlap() || detectTouch() {
             endGame()
         }
-        return newShape
+        return fallingShape!
+    }
+    
+    func dropShape() {
+        // TODO
     }
     
     func letShapeFall() {
         fallingShape?.lowerShapeByOneRow()
+        if detectTouch() {
+            delegate?.gamePieceDidLand(self, landedShape: fallingShape!)
+        }
     }
     
-    func detectCollision() -> Bool {
-        // TODO
+    func settleShape() {
+        if let shape = fallingShape {
+            for block in shape.blocks {
+                blockArray[block.column, block.row] = block
+            }
+        }
+    }
+    
+    // Private
+    func detectOverlap() -> Bool {
+        if let shape = fallingShape {
+            for block in shape.blocks {
+                if let collidingBlock = blockArray[block.column, block.row] {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    // Private
+    func detectTouch() -> Bool {
+        if let shape = fallingShape {
+            for bottomBlock in shape.bottomBlocks {
+                if (bottomBlock.row == 0) {
+                    return true
+                } else if let blockBelow = blockArray[bottomBlock.column, bottomBlock.row - 1] {
+                    return true
+                }
+            }
+        }
         return false
     }
     

@@ -35,6 +35,11 @@ class GameScene: SKScene {
             x: -BlockSize * CGFloat(NumColumns) / 2,
             y: -BlockSize * CGFloat(NumRows) / 2)
         
+        let color:UIColor = UIColor(red: CGFloat(255), green: CGFloat(255), blue: CGFloat(255), alpha: CGFloat(0.5))
+        let map = SKSpriteNode(color: color, size:CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
+        map.position = CGPoint(x:CGFloat(0), y:CGFloat(0))
+        
+        gameLayer.addChild(map)
         shapeLayer.position = layerPosition
         gameLayer.addChild(shapeLayer)
     }
@@ -46,23 +51,36 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         if lastTick == nil {
+            return
+        }
+        var timePassed = lastTick!.timeIntervalSinceNow * -1000.0
+        if timePassed > TickLengthMillis {
             lastTick = NSDate.date()
-        } else {
-            var timePassed = lastTick!.timeIntervalSinceNow * -1000.0
-            if timePassed > TickLengthMillis {
-                lastTick = NSDate.date()
-                tick?()
-            }
+            tick?()
         }
     }
     
-    func addSpritesForShape(shape:Shape) {
-        for block in shape.blocks {
+    func startTicking() {
+        lastTick = NSDate.date()
+    }
+    
+    func addShapeToScene(shape:Shape, completion:() -> ()) {
+        for (idx, block) in enumerate(shape.blocks) {
             let sprite = SKSpriteNode(imageNamed: block.spriteName)
-            sprite.position = pointForColumn(block.column, row:block.row)
+            sprite.position = pointForColumn(block.column, row:block.row + 2)
+            print(sprite)
             shapeLayer.addChild(sprite)
             block.sprite = sprite
+            
+            // Animation
+            sprite.alpha = 0
+            let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: NSTimeInterval(0.2))
+            moveAction.timingMode = .EaseOut
+            let fadeInAction = SKAction.fadeAlphaTo(1.0, duration: NSTimeInterval(0.4))
+            fadeInAction.timingMode = .EaseOut
+            sprite.runAction(SKAction.group([moveAction, fadeInAction]))
         }
+        runAction(SKAction.waitForDuration(NSTimeInterval(0.4)), completion: completion)
     }
     
     func pointForColumn(column: Int, row: Int) -> CGPoint {
@@ -77,11 +95,7 @@ class GameScene: SKScene {
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
-            if idx == 0 {
-                sprite.runAction(moveToAction, completion)
-            } else {
-                sprite.runAction(moveToAction)
-            }
+            sprite.runAction(moveToAction, completion: idx == 0 ? completion : nil)
         }
     }
 }

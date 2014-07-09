@@ -23,7 +23,7 @@ class Set<T: Hashable>: Sequence, Printable {
         return dictionary[element] != nil
     }
     
-    func allElements() -> T[] {
+    func allElements() -> [T] {
         return Array(dictionary.keys)
     }
     
