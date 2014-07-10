@@ -2,6 +2,9 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
+    @IBOutlet var swipeRec: UISwipeGestureRecognizer
+    @IBOutlet var panRec: UIPanGestureRecognizer
+    @IBOutlet var tapRec: UITapGestureRecognizer
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
@@ -44,9 +47,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
-        if swiftris.gameOver {
-            return
-        }
         if sender.state == .Ended {
             panPointReference = nil
         }
@@ -69,10 +69,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     @IBAction func didSwipe(sender: UISwipeGestureRecognizer) {
-        if swiftris.gameOver {
-            return
-        }
         swiftris.dropShape()
+    }
+    
+    
+    @IBAction func didTap(sender: UITapGestureRecognizer) {
+        
     }
     
     func didTick() {
@@ -98,12 +100,18 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     func gameDidBegin(swiftris: Swiftris) {
         scene.addShapeToScene(swiftris.fallingShape!) {
+            self.swipeRec.enabled = true
+            self.panRec.enabled = true
+            self.tapRec.enabled = true
             self.didTick()
             self.scene.startTicking()
         }
     }
     
     func gameDidEnd(swiftris: Swiftris) {
+        self.swipeRec.enabled = false
+        self.panRec.enabled = false
+        self.tapRec.enabled = false
         scene.stopTicking()
     }
     
@@ -111,8 +119,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.stopTicking()
         // TODO Check for lines made?
         if let newShape = swiftris.newShape() {
-            scene.addShapeToScene(newShape) {}
-            scene.startTicking()
+            scene.addShapeToScene(newShape) {
+                self.scene.startTicking()
+            }
         }
     }
     
