@@ -74,7 +74,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     
     @IBAction func didTap(sender: UITapGestureRecognizer) {
-        
+        swiftris.rotateShape()
     }
     
     func didTick() {
@@ -90,6 +90,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
         if let swipeRec = gestureRecognizer as? UISwipeGestureRecognizer {
             if let panRec = otherGestureRecognizer as? UIPanGestureRecognizer {
+                return true
+            }
+        } else if let panRec = gestureRecognizer as? UIPanGestureRecognizer {
+            if let tapRec = otherGestureRecognizer as? UITapGestureRecognizer {
                 return true
             }
         }
@@ -113,6 +117,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         self.panRec.enabled = false
         self.tapRec.enabled = false
         scene.stopTicking()
+        scene.addShapeToScene(swiftris.fallingShape!) {}
     }
     
     func gamePieceDidLand(swiftris: Swiftris) {

@@ -87,7 +87,8 @@ class GameScene: SKScene {
             sprite.alpha = 0
             let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: NSTimeInterval(0.2))
             moveAction.timingMode = .EaseOut
-            let fadeInAction = SKAction.fadeAlphaTo(1.0, duration: NSTimeInterval(0.4))
+            let fadeTo:CGFloat = block.row >= NumRows ? 0.5 : 1.0
+            let fadeInAction = SKAction.fadeAlphaTo(fadeTo, duration: NSTimeInterval(0.4))
             fadeInAction.timingMode = .EaseOut
             sprite.runAction(SKAction.group([moveAction, fadeInAction]))
         }

@@ -37,6 +37,9 @@ class Swiftris {
     func newShape() -> Shape? {
         fallingShape = Shape.random(StartingRow, startingCol: StartingColumn)
         if detectIllegalPlacement() {
+            while detectOverlappingBlocks() {
+                fallingShape?.raiseShapeByOneRow()
+            }
             endGame()
             return nil
         }
@@ -73,14 +76,15 @@ class Swiftris {
         }
     }
     
-    // Private
-    func settleShape() {
-        if let shape = fallingShape {
-            for block in shape.blocks {
-                blockArray[block.column, block.row] = block
-            }
+    func rotateShape() {
+        fallingShape?.rotateClockwise()
+        if detectIllegalPlacement() {
+            fallingShape?.rotateCounterClockwise()
+        } else {
+            delegate?.gamePieceDidMove(self)
         }
     }
+
     
     func moveShapeLeft() {
         fallingShape?.shiftLeftByOneColumn()
@@ -101,6 +105,23 @@ class Swiftris {
     }
     
     // Private
+    func settleShape() {
+        if let shape = fallingShape {
+            for block in shape.blocks {
+                blockArray[block.column, block.row] = block
+            }
+        }
+    }
+    
+    // Private
+    func detectIllegalPlacement() -> Bool {
+        if detectOutOfBounds() || detectOverlappingBlocks() {
+            return true;
+        }
+        return false
+    }
+    
+    // Private
     func detectOutOfBounds() -> Bool {
         if let shape = fallingShape {
             for block in shape.blocks {
@@ -114,12 +135,13 @@ class Swiftris {
     }
     
     // Private
-    func detectIllegalPlacement() -> Bool {
-        if detectOutOfBounds() {
-            return true;
-        }
+    func detectOverlappingBlocks() -> Bool {
         if let shape = fallingShape {
             for block in shape.blocks {
+                if block.column < 0 || block.column >= NumColumns
+                    || block.row < 0 || block.row >= NumRows {
+                        continue
+                }
                 if blockArray[block.column, block.row] != nil {
                     return true
                 }
@@ -142,6 +164,7 @@ class Swiftris {
         return false
     }
     
+    // Private
     func endGame() {
         gameOver = true
         delegate?.gameDidEnd(self)
