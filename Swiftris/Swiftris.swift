@@ -38,7 +38,7 @@ class Swiftris {
         fallingShape = Shape.random(StartingRow, startingCol: StartingColumn)
         if detectIllegalPlacement() {
             while detectOverlappingBlocks() {
-                fallingShape?.raiseShapeByOneRow()
+                self.fallingShape?.raiseShapeByOneRow()
             }
             endGame()
             return nil
@@ -115,10 +115,7 @@ class Swiftris {
     
     // Private
     func detectIllegalPlacement() -> Bool {
-        if detectOutOfBounds() || detectOverlappingBlocks() {
-            return true;
-        }
-        return false
+        return detectOutOfBounds() || detectOverlappingBlocks()
     }
     
     // Private
@@ -154,10 +151,9 @@ class Swiftris {
     func detectTouch() -> Bool {
         if let shape = fallingShape {
             for bottomBlock in shape.bottomBlocks {
-                if bottomBlock.row == 0 {
+                if bottomBlock.row == 0 ||
+                    blockArray[bottomBlock.column, bottomBlock.row - 1] != nil {
                     return true
-                } else if let blockBelow = blockArray[bottomBlock.column, bottomBlock.row - 1] {
-                    return blockArray[bottomBlock.column, bottomBlock.row] == nil
                 }
             }
         }

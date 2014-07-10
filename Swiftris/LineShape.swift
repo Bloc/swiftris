@@ -12,9 +12,9 @@ class LineShape:Shape {
     
     override var bottomBlocks:Array<Block> {
         if orientation.isVertical() {
-            return [self.blocks[FourthBlockIdx]]
+            return [blocks[FourthBlockIdx]]
         } else {
-            return self.blocks
+            return blocks
         }
     }
     
@@ -27,22 +27,23 @@ class LineShape:Shape {
             } else {
                 column = self.column + i
             }
-            let block = Block(column: column, row: row, style: BlockStyle.random(), color: self.color)
+            let block = Block(column: column, row: row, style: BlockStyle.random(), color: color)
             blocks.append(block)
         }
     }
     
     override func rotateBlocksToOrientation(orientation: Orientation) {
+        println("Rotating from \(self.orientation) to \(orientation)")
         // Hinges around SecondBlockIdx
         if (orientation.isHorizontal() && self.orientation.isHorizontal()) {
             return
         } else if (orientation.isVertical() && self.orientation.isVertical()) {
             return
         }
-        let hingeColumn:Int = self.blocks[SecondBlockIdx].column
-        let hingeRow:Int = self.blocks[SecondBlockIdx].row
+        let hingeColumn:Int = blocks[SecondBlockIdx].column
+        let hingeRow:Int = blocks[SecondBlockIdx].row
         for i in 0...FourthBlockIdx {
-            let block = self.blocks[i]
+            let block = blocks[i]
             if orientation.isVertical() {
                 block.column = hingeColumn
                 block.row = hingeRow - (i - SecondBlockIdx)
@@ -52,7 +53,7 @@ class LineShape:Shape {
             }
         }
         // Update the shape's row and column
-        column = self.blocks[FirstBlockIdx].column
-        row = self.blocks[FirstBlockIdx].row
+        column = blocks[FirstBlockIdx].column
+        row = blocks[FirstBlockIdx].row
     }
 }

@@ -1,11 +1,24 @@
 // Shape class defines a swiftris shape
 import SpriteKit
 
-enum Orientation: Int {
+enum Orientation: Int, Printable {
     case Zero = 0
     case Ninety = 1
     case OneEighty = 2
     case TwoSeventy = 3
+    
+    var description: String {
+        switch self {
+            case .Zero:
+                return "Zero"
+            case .Ninety:
+                return "Ninety"
+            case .OneEighty:
+                return "One Eighty"
+            case .TwoSeventy:
+                return "Two Seventy"
+        }
+    }
     
     func is0() -> Bool {
         return self == Zero
@@ -32,10 +45,7 @@ enum Orientation: Int {
     }
     
     static func rotate(orientation:Orientation, clockwise: Bool) -> Orientation {
-        var rotated = orientation.toRaw() + 1
-        if clockwise == false {
-            rotated = orientation.toRaw() - 2
-        }
+        var rotated = orientation.toRaw() + (clockwise ? 1 : -1)
         if rotated > Orientation.TwoSeventy.toRaw() {
             rotated = Orientation.Zero.toRaw()
         } else if rotated < 0 {
