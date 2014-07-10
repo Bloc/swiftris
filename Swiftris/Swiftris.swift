@@ -23,12 +23,13 @@ class Swiftris {
     var gameOver:Bool
     
     init() {
-        gameOver = false
+        gameOver = true
         fallingShape = nil
         blockArray = Array2D<Block>(columns: NumColumns, rows: NumRows)
     }
     
     func beginGame() {
+        gameOver = false
         fallingShape = newShape()
         delegate?.gameDidBegin(self)
     }
@@ -61,6 +62,7 @@ class Swiftris {
         fallingShape?.lowerShapeByOneRow()
         if detectIllegalPlacement() {
             fallingShape?.raiseShapeByOneRow()
+            settleShape()
             delegate?.gamePieceDidLand(self)
         } else if detectTouch() {
             delegate?.gamePieceDidMove(self)
@@ -104,7 +106,7 @@ class Swiftris {
             for block in shape.blocks {
                 if block.column < 0 || block.column >= NumColumns
                     || block.row < 0 || block.row >= NumRows {
-                        return true
+                    return true
                 }
             }
         }
