@@ -16,6 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="3TP-cA-4Ln" appends="YES" id="sfD-M7-Skf"/>
+                            <outletCollection property="gestureRecognizers" destination="Jce-Wm-tOj" appends="YES" id="sBq-yz-4sF"/>
+                        </connections>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4">
@@ -24,6 +29,18 @@
                     </simulatedScreenMetrics>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="Jce-Wm-tOj">
+                    <connections>
+                        <action selector="didSwipe:" destination="LVB-YS-i5n" id="6gs-LW-TWe"/>
+                        <outlet property="delegate" destination="LVB-YS-i5n" id="hOL-BR-iXQ"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3TP-cA-4Ln">
+                    <connections>
+                        <action selector="didPan:" destination="LVB-YS-i5n" id="sAs-Oa-5MA"/>
+                        <outlet property="delegate" destination="LVB-YS-i5n" id="AM9-4t-KPx"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="203" y="92"/>
         </scene>

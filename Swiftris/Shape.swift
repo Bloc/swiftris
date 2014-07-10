@@ -124,6 +124,20 @@ class Shape: Hashable, Printable {
         }
     }
     
+    @final func shiftRightByOneColumn() {
+        self.column += 1
+        for block in blocks {
+            block.column += 1
+        }
+    }
+    
+    @final func shiftLeftByOneColumn() {
+        self.column -= 1
+        for block in blocks {
+            block.column -= 1
+        }
+    }
+    
     @final class func random(startingRow:Int, startingCol:Int) -> Shape {
         var randomColor:BlockColor = BlockColor.random()
         var randomMirror:Bool = arc4random_uniform(1) == 1

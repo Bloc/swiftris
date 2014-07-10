@@ -8,9 +8,10 @@
 
 import SpriteKit
 
+let BlockSize:CGFloat = 16.0
+
 class GameScene: SKScene {
     let TickLengthMillis = NSTimeInterval(600)
-    let BlockSize:CGFloat = 16.0
     
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
@@ -64,6 +65,10 @@ class GameScene: SKScene {
     
     func startTicking() {
         lastTick = NSDate.date()
+    }
+    
+    func stopTicking() {
+        lastTick == nil
     }
     
     func addShapeToScene(shape:Shape, completion:() -> ()) {
