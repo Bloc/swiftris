@@ -15,6 +15,8 @@ class GameScene: SKScene {
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
     
+    var textureCache = Dictionary<String, SKTexture>()
+    
     var tick:(() -> ())?
     
     var swiftris:Swiftris!
@@ -66,9 +68,13 @@ class GameScene: SKScene {
     
     func addShapeToScene(shape:Shape, completion:() -> ()) {
         for (idx, block) in enumerate(shape.blocks) {
-            let sprite = SKSpriteNode(imageNamed: block.spriteName)
+            var texture = textureCache[block.spriteName]
+            if texture == nil {
+                texture = SKTexture(imageNamed: block.spriteName)
+                textureCache[block.spriteName] = texture
+            }
+            let sprite = SKSpriteNode(texture: texture)
             sprite.position = pointForColumn(block.column, row:block.row + 2)
-            print(sprite)
             shapeLayer.addChild(sprite)
             block.sprite = sprite
             
