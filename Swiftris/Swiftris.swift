@@ -20,7 +20,10 @@ class Swiftris {
     
     var score:Int = 0
     
+    var gameOver:Bool
+    
     init() {
+        gameOver = false
         fallingShape = nil
         blockArray = Array2D<Block>(columns: NumColumns, rows: NumRows)
     }
@@ -30,18 +33,19 @@ class Swiftris {
         delegate?.gameDidBegin(self)
     }
     
-    func newShape() -> Shape {
+    func newShape() -> Shape? {
         fallingShape = Shape.random(StartingRow, startingCol: StartingColumn)
-        if detectOverlap() || detectTouch() {
+        if detectIllegalPlacement() {
             endGame()
+            return nil
         }
-        return fallingShape!
+        return fallingShape
     }
     
     func dropShape() {
         if let shape = fallingShape {
             let startingRow = shape.row
-            while detectOverlap() == false {
+            while detectIllegalPlacement() == false {
                 shape.lowerShapeByOneRow()
             }
             shape.raiseShapeByOneRow()
@@ -55,7 +59,7 @@ class Swiftris {
     
     func letShapeFall() {
         fallingShape?.lowerShapeByOneRow()
-        if detectOverlap() {
+        if detectIllegalPlacement() {
             fallingShape?.raiseShapeByOneRow()
             delegate?.gamePieceDidLand(self)
         } else if detectTouch() {
@@ -67,18 +71,18 @@ class Swiftris {
         }
     }
     
+    // Private
     func settleShape() {
         if let shape = fallingShape {
             for block in shape.blocks {
                 blockArray[block.column, block.row] = block
             }
-            fallingShape = nil
         }
     }
     
     func moveShapeLeft() {
         fallingShape?.shiftLeftByOneColumn()
-        if detectOverlap() {
+        if detectIllegalPlacement() {
             fallingShape?.shiftRightByOneColumn()
             return
         }
@@ -87,7 +91,7 @@ class Swiftris {
     
     func moveShapeRight() {
         fallingShape?.shiftRightByOneColumn()
-        if detectOverlap() {
+        if detectIllegalPlacement() {
             fallingShape?.shiftLeftByOneColumn()
             return
         }
@@ -108,7 +112,7 @@ class Swiftris {
     }
     
     // Private
-    func detectOverlap() -> Bool {
+    func detectIllegalPlacement() -> Bool {
         if detectOutOfBounds() {
             return true;
         }
@@ -137,7 +141,7 @@ class Swiftris {
     }
     
     func endGame() {
-        // TODO what else?
+        gameOver = true
         delegate?.gameDidEnd(self)
     }
 }

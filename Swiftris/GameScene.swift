@@ -68,7 +68,7 @@ class GameScene: SKScene {
     }
     
     func stopTicking() {
-        lastTick == nil
+        lastTick = nil
     }
     
     func addShapeToScene(shape:Shape, completion:() -> ()) {

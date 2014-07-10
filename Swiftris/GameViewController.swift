@@ -44,6 +44,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
+        if swiftris.gameOver {
+            return
+        }
         let currentPoint = sender.translationInView(self.view)
         if let originalPoint = self.panPointReference {
             if abs(currentPoint.x - originalPoint.x) >= BlockSize {
@@ -61,6 +64,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     @IBAction func didSwipe(sender: UISwipeGestureRecognizer) {
+        if swiftris.gameOver {
+            return
+        }
         swiftris.dropShape()
     }
     
@@ -90,9 +96,10 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gamePieceDidLand(swiftris: Swiftris) {
         scene.stopTicking()
         // TODO Check for lines made?
-        swiftris.newShape()
-        scene.addShapeToScene(swiftris.fallingShape!) {}
-        scene.startTicking()
+        if let newShape = swiftris.newShape() {
+            scene.addShapeToScene(newShape) {}
+            scene.startTicking()
+        }
     }
     
     func gamePieceDidMove(swiftris: Swiftris) {
