@@ -47,18 +47,23 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         if swiftris.gameOver {
             return
         }
+        if sender.state == .Ended {
+            panPointReference = nil
+        }
         let currentPoint = sender.translationInView(self.view)
-        if let originalPoint = self.panPointReference {
-            if abs(currentPoint.x - originalPoint.x) >= BlockSize {
+        if let originalPoint = panPointReference {
+            if abs(currentPoint.x - originalPoint.x) > BlockSize * 1.5 {
                 if currentPoint.x > originalPoint.x {
-                    swiftris.moveShapeRight()
-                } else {
+                    if sender.velocityInView(self.view).x > CGFloat(0) {
+                        swiftris.moveShapeRight()
+                    }
+                } else if sender.velocityInView(self.view).x < CGFloat(0) {
                     swiftris.moveShapeLeft()
                 }
+                panPointReference = currentPoint
                 sender.setTranslation(currentPoint, inView: self.view)
             }
         } else {
-            println("Setting original reference: \(currentPoint)")
             panPointReference = currentPoint
         }
     }
@@ -78,6 +83,15 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
         return true
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
+        if let swipeRec = gestureRecognizer as? UISwipeGestureRecognizer {
+            if let panRec = otherGestureRecognizer as? UIPanGestureRecognizer {
+                return true
+            }
+        }
+        return false
     }
     
     // Switris Delegate
