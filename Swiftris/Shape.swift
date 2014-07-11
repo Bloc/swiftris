@@ -59,9 +59,22 @@ enum Orientation: Int, Printable {
     }
 }
 
-// The number of total shape varieities
-let NumShapeTypes:UInt32 = 5
+struct Rotation: Hashable {
+    let from: Orientation
+    let to: Orientation
+    
+    var hashValue: Int {
+        return from.toRaw() ^ to.toRaw()
+    }
+}
 
+func ==(lhs: Rotation, rhs: Rotation) -> Bool {
+    return lhs.from == rhs.from && lhs.to == rhs.to
+}
+
+// The number of total shape varieities
+let NumShapeTypes:UInt32 = 7
+// Shape indexes
 let FirstBlockIdx:Int = 0
 let SecondBlockIdx:Int = 1
 let ThirdBlockIdx:Int = 2
@@ -77,21 +90,37 @@ class Shape: Hashable, Printable {
     var orientation: Orientation
     // The top-left corner of the shape's area
     var column, row:Int
-    // The area this shape consumes, sublcasses should override
-    var area:Int {
-        return 4
+    
+    // Required Overrides
+    
+    // Subclasses must override this property
+    var blockRowColumnPositions: [Orientation: Array<(columnDiff: Int, rowDiff: Int)>] {
+        return [:]
     }
-    // Subclases should override this calculated property
-    var bottomBlocks:Array<Block> {
-        return Array<Block>()
+    // Subclasses must override this property
+    var bottomBlocksForOrientations: [Orientation: Array<Int>] {
+        return [:]
     }
     
+    var bottomBlocks:Array<Block> {
+        if let bottomBlockIndexes: Array<Int> = bottomBlocksForOrientations[orientation] {
+            var bottomBlocksArray = Array<Block>()
+            for i in bottomBlockIndexes {
+                bottomBlocksArray.append(blocks[i])
+            }
+            return bottomBlocksArray
+        }
+        return []
+    }
+
+    // Hashable
     var hashValue:Int {
         return reduce(blocks, 0) { $0.hashValue ^ $1.hashValue }
     }
     
+    // Printable
     var description:String {
-    return "\(orientation): \(blocks[FirstBlockIdx]), \(blocks[SecondBlockIdx]), \(blocks[ThirdBlockIdx]), \(blocks[FourthBlockIdx])"
+        return "\(orientation): \(blocks[FirstBlockIdx]), \(blocks[SecondBlockIdx]), \(blocks[ThirdBlockIdx]), \(blocks[FourthBlockIdx])"
     }
     
     init(column:Int, row:Int, color: BlockColor, orientation:Orientation) {
@@ -106,22 +135,36 @@ class Shape: Hashable, Printable {
         self.init(column:column, row:row, color:BlockColor.random(), orientation:Orientation.random())
     }
     
-    func initializeBlocks() {
-        // Subclasses must override
+    @final func initializeBlocks() {
+        if let blockRowColumnTranslations:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] {
+            for i in 0..<blockRowColumnTranslations.count {
+                let blockRow = row + blockRowColumnTranslations[i].rowDiff
+                let blockColumn = column + blockRowColumnTranslations[i].columnDiff
+                let newBlock = Block(column: blockColumn, row: blockRow, color: color)
+                blocks.append(newBlock)
+            }
+        }
     }
     
-    // Protected
-    func rotateBlocksToOrientation(orientation: Orientation) {
-        // Subclasses should override
+    // Private
+    @final func rotateBlocks(rotation: Rotation) {
+        if let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[rotation.to] {
+            for (idx, (columnDiff:Int, rowDiff:Int)) in enumerate(blockRowColumnTranslation) {
+                blocks[idx].column = column + columnDiff
+                blocks[idx].row = row + rowDiff
+            }
+        }
     }
     
     @final func rotateClockwise() {
-        rotateBlocksToOrientation(Orientation.rotate(orientation, clockwise: true))
+        let rotation = Rotation(from: orientation, to: Orientation.rotate(orientation, clockwise: true))
+        rotateBlocks(rotation)
         orientation = Orientation.rotate(orientation, clockwise: true)
     }
     
     @final func rotateCounterClockwise() {
-        rotateBlocksToOrientation(Orientation.rotate(orientation, clockwise: false))
+        let rotation = Rotation(from: orientation, to: Orientation.rotate(orientation, clockwise: false))
+        rotateBlocks(rotation)
         orientation = Orientation.rotate(orientation, clockwise: false)
     }
     
@@ -153,15 +196,22 @@ class Shape: Hashable, Printable {
         }
     }
     
-    @final class func random(startingRow:Int, startingCol:Int) -> Shape {
-        // TODO all shapes
+    @final class func random(startingColumn:Int, startingRow:Int) -> Shape {
         switch Int(arc4random_uniform(NumShapeTypes)) {
         case 0:
-            return SquareShape(column:startingCol, row:startingRow)
+            return SquareShape(column:startingColumn, row:startingRow)
         case 1:
-            return LineShape(column:startingCol, row:startingRow)
+            return LineShape(column:startingColumn, row:startingRow)
+        case 2:
+            return TShape(column:startingColumn, row:startingRow)
+        case 3:
+            return ZigZagOneShape(column:startingColumn, row:startingRow)
+        case 4:
+            return ZigZagTwoShape(column:startingColumn, row:startingRow)
+        case 5:
+            return LOneShape(column:startingColumn, row:startingRow)
         default:
-            return LineShape(column:startingCol, row:startingRow)
+            return LTwoShape(column:startingColumn, row:startingRow)
         }
     }
 }

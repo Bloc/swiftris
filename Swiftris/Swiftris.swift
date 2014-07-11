@@ -35,7 +35,7 @@ class Swiftris {
     }
     
     func newShape() -> Shape? {
-        fallingShape = Shape.random(StartingRow, startingCol: StartingColumn)
+        fallingShape = Shape.random(StartingColumn, startingRow: StartingRow)
         if detectIllegalPlacement() {
             while detectOverlappingBlocks() {
                 self.fallingShape?.raiseShapeByOneRow()

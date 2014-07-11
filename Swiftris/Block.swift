@@ -78,6 +78,10 @@ class Block: Hashable, Printable {
         self.row = row
         self.type = (style, color)
     }
+    
+    convenience init(column:Int, row:Int, color:BlockColor) {
+        self.init(column:column, row:row, style:BlockStyle.random(), color:color)
+    }
 }
 
 func ==(lhs: Block, rhs: Block) -> Bool {

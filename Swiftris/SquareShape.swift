@@ -1,23 +1,31 @@
 class SquareShape:Shape {
     /*
-        | 0 | 1 |
+
+        | 0•| 1 |
         | 2 | 3 |
+    
+    • marks the row/column indicator for the shape
+    
     */
     
+    // The square shape will not rotate
     
-    // Square does not handle rotation at all since it 
-    // looks the same no matter what orientation it is in
-    
-    override var bottomBlocks:Array<Block> {
-        return [self.blocks[ThirdBlockIdx], self.blocks[FourthBlockIdx]]
+    override var blockRowColumnPositions: [Orientation: Array<(columnDiff: Int, rowDiff: Int)>] {
+        return [
+            Orientation.Zero:       [(0, 0), (1, 0), (0,-1), (1,-1)],
+            Orientation.OneEighty:  [(0, 0), (1, 0), (0,-1), (1,-1)],
+            Orientation.Ninety:     [(0, 0), (1, 0), (0,-1), (1,-1)],
+            Orientation.TwoSeventy: [(0, 0), (1, 0), (0,-1), (1,-1)]
+        ]
     }
     
-    override func initializeBlocks() {
-        for i in 0...FourthBlockIdx {
-            let column:Int = i == 0 || i == 2 ? self.column : self.column + 1
-            let row:Int = i == 0 || i == 1 ? self.row : self.row - 1
-            let block = Block(column:column, row:row, style:BlockStyle.random(), color:self.color)
-            self.blocks.append(block)
-        }
+    override var bottomBlocksForOrientations: [Orientation: Array<Int>] {
+        return [
+            Orientation.Zero:       [ThirdBlockIdx, FourthBlockIdx],
+            Orientation.OneEighty:  [ThirdBlockIdx, FourthBlockIdx],
+            Orientation.Ninety:     [ThirdBlockIdx, FourthBlockIdx],
+            Orientation.TwoSeventy: [ThirdBlockIdx, FourthBlockIdx]
+        ]
     }
+
 }
