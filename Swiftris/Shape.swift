@@ -10,13 +10,13 @@ enum Orientation: Int, Printable {
     var description: String {
         switch self {
             case .Zero:
-                return "Zero"
+                return "0"
             case .Ninety:
-                return "Ninety"
+                return "90"
             case .OneEighty:
-                return "One Eighty"
+                return "180"
             case .TwoSeventy:
-                return "Two Seventy"
+                return "270"
         }
     }
     
@@ -44,6 +44,10 @@ enum Orientation: Int, Printable {
         return is90() || is270()
     }
     
+    static func random() -> Orientation {
+        return Orientation.fromRaw(Int(arc4random_uniform(4)))!
+    }
+    
     static func rotate(orientation:Orientation, clockwise: Bool) -> Orientation {
         var rotated = orientation.toRaw() + (clockwise ? 1 : -1)
         if rotated > Orientation.TwoSeventy.toRaw() {
@@ -64,8 +68,6 @@ let ThirdBlockIdx:Int = 2
 let FourthBlockIdx:Int = 3
 
 class Shape: Hashable, Printable {
-    // Whether or not the shape is mirrored
-    let mirrored:Bool
     // The color of the shape
     let color:BlockColor
     
@@ -89,16 +91,19 @@ class Shape: Hashable, Printable {
     }
     
     var description:String {
-        return "Shape"
+    return "\(orientation): \(blocks[FirstBlockIdx]), \(blocks[SecondBlockIdx]), \(blocks[ThirdBlockIdx]), \(blocks[FourthBlockIdx])"
     }
     
-    init(color: BlockColor, column:Int, row:Int, mirrored:Bool) {
+    init(column:Int, row:Int, color: BlockColor, orientation:Orientation) {
         self.color = color
         self.column = column
         self.row = row
-        self.mirrored = mirrored
-        orientation = .Zero
+        self.orientation = orientation
         initializeBlocks()
+    }
+    
+    convenience init(column:Int, row:Int) {
+        self.init(column:column, row:row, color:BlockColor.random(), orientation:Orientation.random())
     }
     
     func initializeBlocks() {
@@ -149,19 +154,14 @@ class Shape: Hashable, Printable {
     }
     
     @final class func random(startingRow:Int, startingCol:Int) -> Shape {
-        var randomColor:BlockColor = BlockColor.random()
-        var randomMirror:Bool = arc4random_uniform(1) == 1
         // TODO all shapes
         switch Int(arc4random_uniform(NumShapeTypes)) {
         case 0:
-            return SquareShape(color: randomColor, column: startingCol,
-                row:startingRow, mirrored:randomMirror)
+            return SquareShape(column:startingCol, row:startingRow)
         case 1:
-            return LineShape(color: randomColor, column: startingCol,
-                row:startingRow, mirrored:randomMirror)
+            return LineShape(column:startingCol, row:startingRow)
         default:
-            return LineShape(color: randomColor, column: startingCol,
-                row:startingRow, mirrored:randomMirror)
+            return LineShape(column:startingCol, row:startingRow)
         }
     }
 }
