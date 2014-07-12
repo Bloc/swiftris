@@ -122,8 +122,17 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     func gamePieceDidLand(swiftris: Swiftris) {
         scene.stopTicking()
-        // TODO Check for lines made?
-        if let newShape = swiftris.newShape() {
+        let removedLines = swiftris.removeCompletedLines()
+        if removedLines.linesRemoved.count > 0 {
+            swiftris.score += PointsPerLine * removedLines.linesRemoved.count
+            scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks) {
+                if let newShape = swiftris.newShape() {
+                    self.scene.addShapeToScene(newShape) {
+                        self.scene.startTicking()
+                    }
+                }
+            }
+        } else if let newShape = swiftris.newShape() {
             scene.addShapeToScene(newShape) {
                 self.scene.startTicking()
             }

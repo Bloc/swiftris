@@ -95,6 +95,36 @@ class GameScene: SKScene {
         runAction(SKAction.waitForDuration(NSTimeInterval(0.4)), completion: completion)
     }
     
+    func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion:() -> ()) {
+        // another behemoth…
+        var longestDuration: NSTimeInterval = 0
+        
+        for (columnIdx, column) in enumerate(fallenBlocks) {
+            for (blockIdx, block) in enumerate(column) {
+                let newPosition = pointForColumn(block.column, row: block.row)
+                let sprite = block.sprite!
+                let delay = (NSTimeInterval(columnIdx) * 0.05) + (NSTimeInterval(blockIdx) * 0.05)
+                let duration = NSTimeInterval(((sprite.position.y - newPosition.y) / BlockSize) * 0.1)
+                let moveAction = SKAction.moveTo(newPosition, duration: duration)
+                moveAction.timingMode = .EaseOut
+                sprite.runAction(
+                    SKAction.sequence([
+                        SKAction.waitForDuration(delay),
+                        moveAction]))
+                longestDuration = max(longestDuration, duration + delay)
+            }
+        }
+        
+        // TODO remove previous
+        for (rowIdx, row) in enumerate(linesToRemove) {
+            for (blockIdx, block) in enumerate(row) {
+                block.sprite!.runAction(SKAction.removeFromParent())
+            }
+        }
+        
+        runAction(SKAction.waitForDuration(longestDuration), completion:completion)
+    }
+    
     func pointForColumn(column: Int, row: Int) -> CGPoint {
         let x: CGFloat = (CGFloat(column) * BlockSize) + (BlockSize / 2)
         let y: CGFloat = (CGFloat(row) * BlockSize) + (BlockSize / 2)

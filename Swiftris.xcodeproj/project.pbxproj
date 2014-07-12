@@ -26,7 +26,6 @@
 		E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DCF86A196C576B00F72602 /* Main.storyboard */; };
 		E6DCF86E196C576B00F72602 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DCF86D196C576B00F72602 /* Images.xcassets */; };
 		E6DCF87A196C576B00F72602 /* SwiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DCF879196C576B00F72602 /* SwiftrisTests.swift */; };
-		E6F775E5196F4BFA00756BE2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F775E4196F4BFA00756BE2 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +62,6 @@
 		E6DCF873196C576B00F72602 /* SwiftrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DCF878196C576B00F72602 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6DCF879196C576B00F72602 /* SwiftrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftrisTests.swift; sourceTree = "<group>"; };
-		E6F775E4196F4BFA00756BE2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +107,7 @@
 				E6DCF862196C576A00F72602 /* AppDelegate.swift */,
 				E6DCF866196C576A00F72602 /* GameScene.swift */,
 				E6DCF868196C576A00F72602 /* GameViewController.swift */,
-				E6DCF86A196C576B00F72602 /* Main.storyboard */,
+				E6A13113196C911E00488E3F /* Swiftris.swift */,
 				E65E4C0E196C66C6001B3736 /* Set.swift */,
 				E66E351E196C6EA400791C4D /* Block.swift */,
 				E66E3520196C6FA100791C4D /* Shape.swift */,
@@ -120,8 +118,7 @@
 				E64668BB19709B2E006D362A /* ZigZagTwoShape.swift */,
 				E64668BD19709CE9006D362A /* LOneShape.swift */,
 				E64668BF1970A064006D362A /* LTwoShape.swift */,
-				E6A13113196C911E00488E3F /* Swiftris.swift */,
-				E6F775E4196F4BFA00756BE2 /* Utils.swift */,
+				E6DCF86A196C576B00F72602 /* Main.storyboard */,
 				E6DCF86D196C576B00F72602 /* Images.xcassets */,
 				E65E4C0B196C65AD001B3736 /* Sprites.atlas */,
 				E6DCF860196C576A00F72602 /* Supporting Files */,
@@ -265,7 +262,6 @@
 				E6B6339E196DDE320061F6B7 /* LineShape.swift in Sources */,
 				E66E351F196C6EA400791C4D /* Block.swift in Sources */,
 				E6A13114196C911E00488E3F /* Swiftris.swift in Sources */,
-				E6F775E5196F4BFA00756BE2 /* Utils.swift in Sources */,
 				E64668BC19709B2E006D362A /* ZigZagTwoShape.swift in Sources */,
 				E6DCF869196C576B00F72602 /* GameViewController.swift in Sources */,
 				E6DCF863196C576A00F72602 /* AppDelegate.swift in Sources */,

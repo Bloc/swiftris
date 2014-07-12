@@ -4,6 +4,8 @@ let NumRows:Int = 20
 let StartingColumn:Int = 4
 let StartingRow:Int = NumRows - 1
 
+let PointsPerLine = 10
+
 protocol SwiftrisDelegate {
     func gameDidEnd(swiftris: Swiftris)
     func gameDidBegin(swiftris: Swiftris)
@@ -56,8 +58,8 @@ class Swiftris {
             if shape.row != startingRow {
                 delegate?.gamePieceDidMove(self)
             }
-            settleShape()
-            delegate?.gamePieceDidLand(self)
+//            settleShape()
+//            delegate?.gamePieceDidLand(self)
         }
     }
     
@@ -102,6 +104,49 @@ class Swiftris {
             return
         }
         delegate?.gamePieceDidMove(self)
+    }
+    
+    func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
+        var removedLines = Array<Array<Block>>()
+        for row in 0..<NumRows {
+            var rowOfBlocks = Array<Block>()
+            for column in 0..<NumColumns {
+                if let block = blockArray[column, row] {
+                    rowOfBlocks.append(block)
+                }
+            }
+            if rowOfBlocks.count == NumColumns {
+                removedLines.append(rowOfBlocks)
+                for block in rowOfBlocks {
+                    blockArray[block.column, block.row] = nil
+                }
+            }
+        }
+        
+        if removedLines.count == 0 {
+            return ([], [])
+        }
+        
+        var fallenBlocks = Array<Array<Block>>()
+        for column in 0..<NumColumns {
+            var fallenBlocksArray = Array<Block>()
+            for row in removedLines[0][0].row + 1..<NumRows {
+                if let block = blockArray[column, row] {
+                    var newRow = row
+                    while (newRow > 0 && blockArray[column, newRow - 1] == nil) {
+                        newRow--
+                    }
+                    block.row = newRow
+                    blockArray[column, row] = nil
+                    blockArray[column, newRow] = block
+                    fallenBlocksArray.append(block)
+                }
+            }
+            if fallenBlocksArray.count > 0 {
+                fallenBlocks.append(fallenBlocksArray)
+            }
+        }
+        return (removedLines, fallenBlocks)
     }
     
     // Private
