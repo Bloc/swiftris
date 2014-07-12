@@ -104,6 +104,21 @@ class Swiftris {
         delegate?.gamePieceDidMove(self)
     }
     
+    func hasCompletedLines() -> Bool {
+        for row in 0..<NumRows {
+            var rowOfBlocks = Array<Block>()
+            for column in 0..<NumColumns {
+                if let block = blockArray[column, row] {
+                    rowOfBlocks.append(block)
+                }
+            }
+            if rowOfBlocks.count == NumColumns {
+                return true
+            }
+        }
+        return false
+    }
+    
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
         var removedLines = Array<Array<Block>>()
         for row in 0..<NumRows {

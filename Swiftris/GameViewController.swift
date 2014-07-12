@@ -125,7 +125,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         if removedLines.linesRemoved.count > 0 {
             swiftris.score += PointsPerLine * removedLines.linesRemoved.count
             scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks) {
-                if let newShape = swiftris.newShape() {
+                if swiftris.hasCompletedLines() {
+                    self.gamePieceDidLand(swiftris)
+                } else if let newShape = swiftris.newShape() {
                     self.scene.addShapeToScene(newShape) {
                         self.scene.startTicking()
                     }
