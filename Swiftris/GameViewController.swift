@@ -142,4 +142,11 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gamePieceDidMove(swiftris: Swiftris) {
         scene.redrawShape(swiftris.fallingShape!) {}
     }
+    
+    func gamePieceDidDrop(swiftris: Swiftris) {
+        scene.stopTicking()
+        scene.redrawShape(swiftris.fallingShape!) {
+            self.gamePieceDidLand(swiftris)
+        }
+    }
 }

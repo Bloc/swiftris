@@ -11,6 +11,7 @@ protocol SwiftrisDelegate {
     func gameDidBegin(swiftris: Swiftris)
     func gamePieceDidLand(swiftris: Swiftris)
     func gamePieceDidMove(swiftris: Swiftris)
+    func gamePieceDidDrop(swiftris: Swiftris)
 }
 
 class Swiftris {
@@ -55,11 +56,8 @@ class Swiftris {
                 shape.lowerShapeByOneRow()
             }
             shape.raiseShapeByOneRow()
-            if shape.row != startingRow {
-                delegate?.gamePieceDidMove(self)
-            }
-//            settleShape()
-//            delegate?.gamePieceDidLand(self)
+            settleShape()
+            delegate?.gamePieceDidDrop(self)
         }
     }
     

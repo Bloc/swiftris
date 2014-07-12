@@ -118,8 +118,8 @@ class GameScene: SKScene {
         // TODO improve if possible
         for (rowIdx, row) in enumerate(linesToRemove) {
             for (blockIdx, block) in enumerate(row) {
-                let randomRadius = CGFloat(arc4random_uniform(200) + 100)
-                let goLeft = block.column < NumColumns / 2
+                let randomRadius = CGFloat(arc4random_uniform(400) + 100)
+                let goLeft = arc4random_uniform(100) % 2 == 0
                 
                 var point = pointForColumn(block.column, row: block.row)
                 point = CGPointMake(point.x + (goLeft ? -randomRadius : randomRadius), point.y)
@@ -134,7 +134,9 @@ class GameScene: SKScene {
                 let archPath = UIBezierPath(arcCenter: point, radius: randomRadius, startAngle: startAngle, endAngle: endAngle, clockwise: goLeft)
                 let archAction = SKAction.followPath(archPath.CGPath, asOffset: false, orientToPath: true, duration: randomDuration)
                 archAction.timingMode = .EaseIn
-                block.sprite?.runAction(
+                let sprite = block.sprite!
+                sprite.zPosition = 100
+                sprite.runAction(
                     SKAction.sequence(
                         [SKAction.group([archAction, SKAction.fadeOutWithDuration(NSTimeInterval(randomDuration))]),
                             SKAction.removeFromParent()]))
