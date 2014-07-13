@@ -5,12 +5,13 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "Background.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Background.png"
+      "filename" : "Background@2x.png"
     }
   ],
   "info" : {

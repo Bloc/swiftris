@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-let BlockSize:CGFloat = 16.0
+let BlockSize:CGFloat = 20.0
 
 class GameScene: SKScene {
     let TickLengthMillis = NSTimeInterval(600)
@@ -35,15 +35,19 @@ class GameScene: SKScene {
         addChild(gameLayer)
         
         let layerPosition = CGPoint(
-            x: -BlockSize * CGFloat(NumColumns) / 2,
-            y: -BlockSize * CGFloat(NumRows) / 2)
-        
+            x: -BlockSize * 7,
+            y: -BlockSize * 9)
+        println(layerPosition)
+
+      
         let color:UIColor = UIColor(red: CGFloat(255), green: CGFloat(255), blue: CGFloat(255), alpha: CGFloat(0.5))
         let map = SKSpriteNode(color: color, size:CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
-        map.position = CGPoint(x:CGFloat(0), y:CGFloat(0))
+        map.anchorPoint = CGPoint(x:0, y:0)
+        map.position = CGPoint(x:0, y:0)
         
-        gameLayer.addChild(map)
+//        gameLayer.addChild(map)
         shapeLayer.position = layerPosition
+        shapeLayer.addChild(map)
         gameLayer.addChild(shapeLayer)
     }
     
@@ -158,7 +162,8 @@ class GameScene: SKScene {
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
-            sprite.runAction(moveToAction, completion: idx == 0 ? completion : nil)
+            sprite.runAction(moveToAction, completion: nil)
         }
+        runAction(SKAction.waitForDuration(0.05), completion: completion)
     }
 }

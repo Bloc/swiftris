@@ -26,6 +26,8 @@
 		E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DCF86A196C576B00F72602 /* Main.storyboard */; };
 		E6DCF86E196C576B00F72602 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DCF86D196C576B00F72602 /* Images.xcassets */; };
 		E6DCF87A196C576B00F72602 /* SwiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DCF879196C576B00F72602 /* SwiftrisTests.swift */; };
+		F61D58EA1972155600200A23 /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F61D58E81972155600200A23 /* Background@2x.png */; };
+		F61D58EB1972155600200A23 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = F61D58E91972155600200A23 /* Background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		E6DCF873196C576B00F72602 /* SwiftrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DCF878196C576B00F72602 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6DCF879196C576B00F72602 /* SwiftrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftrisTests.swift; sourceTree = "<group>"; };
+		F61D58E81972155600200A23 /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
+		F61D58E91972155600200A23 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,8 @@
 		E6DCF860196C576A00F72602 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F61D58E81972155600200A23 /* Background@2x.png */,
+				F61D58E91972155600200A23 /* Background.png */,
 				E6DCF861196C576A00F72602 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -233,6 +239,8 @@
 			files = (
 				E65E4C0C196C65AD001B3736 /* Sprites.atlas in Resources */,
 				E6DCF86E196C576B00F72602 /* Images.xcassets in Resources */,
+				F61D58EB1972155600200A23 /* Background.png in Resources */,
+				F61D58EA1972155600200A23 /* Background@2x.png in Resources */,
 				E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Swiftris/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -393,6 +402,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Swiftris/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

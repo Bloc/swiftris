@@ -41,7 +41,7 @@ class Swiftris {
         fallingShape = Shape.random(StartingColumn, startingRow: StartingRow)
         if detectIllegalPlacement() {
             while detectOverlappingBlocks() {
-                self.fallingShape?.raiseShapeByOneRow()
+                fallingShape?.raiseShapeByOneRow()
             }
             endGame()
             return nil
@@ -49,61 +49,67 @@ class Swiftris {
         return fallingShape
     }
     
-    func dropShape() {
+    func dropShape() -> Bool {
         if let shape = fallingShape {
-            let startingRow = shape.row
             while detectIllegalPlacement() == false {
                 shape.lowerShapeByOneRow()
             }
             shape.raiseShapeByOneRow()
-            settleShape()
             delegate?.gamePieceDidDrop(self)
+            return true
         }
+        return false
     }
     
     func letShapeFall() {
-        fallingShape?.lowerShapeByOneRow()
-        if detectIllegalPlacement() {
-            fallingShape?.raiseShapeByOneRow()
-            settleShape()
-            delegate?.gamePieceDidLand(self)
-        } else if detectTouch() {
-            delegate?.gamePieceDidMove(self)
-            settleShape()
-            delegate?.gamePieceDidLand(self)
-        } else {
-            delegate?.gamePieceDidMove(self)
+        if let shape = fallingShape {
+            shape.lowerShapeByOneRow()
+            if detectIllegalPlacement() {
+              shape.raiseShapeByOneRow()
+              settleShape()
+            } else if detectTouch() {
+              delegate?.gamePieceDidMove(self)
+              settleShape()
+            } else {
+              delegate?.gamePieceDidMove(self)
+            }
         }
     }
     
     func rotateShape() {
-        fallingShape?.rotateClockwise()
-        if detectIllegalPlacement() {
-            fallingShape?.rotateCounterClockwise()
-        } else {
-            delegate?.gamePieceDidMove(self)
+        if let shape = fallingShape {
+            shape.rotateClockwise()
+            if detectIllegalPlacement() {
+                shape.rotateCounterClockwise()
+            } else {
+                delegate?.gamePieceDidMove(self)
+            }
         }
     }
 
     
     func moveShapeLeft() {
-        fallingShape?.shiftLeftByOneColumn()
-        if detectIllegalPlacement() {
-            fallingShape?.shiftRightByOneColumn()
-            return
+        if let shape = fallingShape {
+            shape.shiftLeftByOneColumn()
+            if detectIllegalPlacement() {
+              shape.shiftRightByOneColumn()
+              return
+            }
+            delegate?.gamePieceDidMove(self)
         }
-        delegate?.gamePieceDidMove(self)
     }
     
     func moveShapeRight() {
-        fallingShape?.shiftRightByOneColumn()
-        if detectIllegalPlacement() {
-            fallingShape?.shiftLeftByOneColumn()
-            return
+        if let shape = fallingShape {
+            shape.shiftRightByOneColumn()
+            if detectIllegalPlacement() {
+              shape.shiftLeftByOneColumn()
+              return
+            }
+            delegate?.gamePieceDidMove(self)
         }
-        delegate?.gamePieceDidMove(self)
     }
-    
+  
     func hasCompletedLines() -> Bool {
         for row in 0..<NumRows {
             var rowOfBlocks = Array<Block>()
@@ -168,6 +174,8 @@ class Swiftris {
             for block in shape.blocks {
                 blockArray[block.column, block.row] = block
             }
+            fallingShape = nil
+            delegate?.gamePieceDidLand(self)
         }
     }
     
@@ -194,8 +202,8 @@ class Swiftris {
         if let shape = fallingShape {
             for block in shape.blocks {
                 if block.column < 0 || block.column >= NumColumns
-                    || block.row < 0 || block.row >= NumRows {
-                        continue
+                  || block.row < 0 || block.row >= NumRows {
+                    continue
                 }
                 if blockArray[block.column, block.row] != nil {
                     return true

@@ -8,7 +8,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,7 +68,9 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     @IBAction func didSwipe(sender: UISwipeGestureRecognizer) {
-        swiftris.dropShape()
+        if swiftris.dropShape() {
+            scene.stopTicking()
+        }
     }
     
     
@@ -145,9 +147,8 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     func gamePieceDidDrop(swiftris: Swiftris) {
-        scene.stopTicking()
         scene.redrawShape(swiftris.fallingShape!) {
-            self.gamePieceDidLand(swiftris)
+            self.didTick()
         }
     }
 }
