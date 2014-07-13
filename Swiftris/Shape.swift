@@ -169,33 +169,30 @@ class Shape: Hashable, Printable {
     }
     
     @final func lowerShapeByOneRow() {
-        self.row -= 1
-        for block in blocks {
-            block.row -= 1
-        }
+        shiftBy(0, rows:-1)
     }
     
     @final func raiseShapeByOneRow() {
-        self.row += 1
-        for block in blocks {
-            block.row += 1
-        }
+        shiftBy(0, rows:1)
     }
     
     @final func shiftRightByOneColumn() {
-        self.column += 1
-        for block in blocks {
-            block.column += 1
-        }
+        shiftBy(1, rows:0)
     }
     
     @final func shiftLeftByOneColumn() {
-        self.column -= 1
+        shiftBy(-1, rows:0)
+    }
+  
+    @final func shiftBy(columns: Int, rows:Int) {
+        self.column += columns
+        self.row += rows
         for block in blocks {
-            block.column -= 1
+            block.column += columns
+            block.row += rows
         }
     }
-    
+  
     @final class func random(startingColumn:Int, startingRow:Int) -> Shape {
         switch Int(arc4random_uniform(NumShapeTypes)) {
         case 0:

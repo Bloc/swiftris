@@ -104,6 +104,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     // Switris Delegate
     
     func gameDidBegin(swiftris: Swiftris) {
+        scene.addShapeToScene(swiftris.nextShape!) {}
         scene.addShapeToScene(swiftris.fallingShape!) {
             self.swipeRec.enabled = true
             self.panRec.enabled = true
@@ -129,19 +130,29 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks) {
                 if swiftris.hasCompletedLines() {
                     self.gamePieceDidLand(swiftris)
-                } else if let newShape = swiftris.newShape() {
-                    self.scene.addShapeToScene(newShape) {
+                } else {
+                    let newShapes = swiftris.newShape()
+                    if let fallingShape = newShapes.fallingShape {
+                        self.scene.redrawShape(fallingShape) {
+                            self.scene.addShapeToScene(newShapes.nextShape!) {
+                                self.scene.startTicking()
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            let newShapes = swiftris.newShape()
+            if let fallingShape = newShapes.fallingShape {
+                self.scene.redrawShape(fallingShape) {
+                    self.scene.addShapeToScene(newShapes.nextShape!) {
                         self.scene.startTicking()
                     }
                 }
             }
-        } else if let newShape = swiftris.newShape() {
-            scene.addShapeToScene(newShape) {
-                self.scene.startTicking()
-            }
         }
     }
-    
+  
     func gamePieceDidMove(swiftris: Swiftris) {
         scene.redrawShape(swiftris.fallingShape!) {}
     }

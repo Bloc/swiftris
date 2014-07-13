@@ -16,7 +16,9 @@ protocol SwiftrisDelegate {
 
 class Swiftris {
     var blockArray:Array2D<Block>
-    
+  
+    var nextShape:Shape?
+  
     var fallingShape:Shape?
     
     var delegate:SwiftrisDelegate?
@@ -33,20 +35,25 @@ class Swiftris {
     
     func beginGame() {
         gameOver = false
-        fallingShape = newShape()
+        newShape()
         delegate?.gameDidBegin(self)
     }
     
-    func newShape() -> Shape? {
-        fallingShape = Shape.random(StartingColumn, startingRow: StartingRow)
+    func newShape() -> (fallingShape:Shape?, nextShape:Shape?) {
+        if nextShape == nil {
+            nextShape = Shape.random(11, startingRow: 18)
+        }
+        fallingShape = nextShape
+        nextShape = Shape.random(11, startingRow: 18)
+        fallingShape?.shiftBy(-7, rows: 1)
         if detectIllegalPlacement() {
             while detectOverlappingBlocks() {
                 fallingShape?.raiseShapeByOneRow()
             }
             endGame()
-            return nil
+            return (nil, nil)
         }
-        return fallingShape
+        return (fallingShape, nextShape)
     }
     
     func dropShape() -> Bool {
