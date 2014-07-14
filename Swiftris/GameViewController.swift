@@ -1,6 +1,5 @@
 import UIKit
 import SpriteKit
-import AVFoundation
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
     @IBOutlet var swipeRec: UISwipeGestureRecognizer
@@ -11,7 +10,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
-    var backgroundMusicPlayer:AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +29,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         
         // Present the scene.
         skView.presentScene(scene)
-        
-        // Play the awesome background music
-        let backgroundMusicURL = NSBundle.mainBundle().URLForResource("warrior", withExtension:"mp3")
-        self.backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: backgroundMusicURL, error: nil)
-        if self.backgroundMusicPlayer {
-            self.backgroundMusicPlayer!.numberOfLoops = -1;
-            self.backgroundMusicPlayer!.prepareToPlay()
-            self.backgroundMusicPlayer!.play()
-        }
     }
     
     override func prefersStatusBarHidden() -> Bool {

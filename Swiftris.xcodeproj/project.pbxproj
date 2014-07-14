@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93F90C2B1974837700FAD1AF /* warrior.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2A1974837700FAD1AF /* warrior.mp3 */; };
 		93F90C3019748A4200FAD1AF /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2C19748A4200FAD1AF /* bomb.mp3 */; };
 		93F90C3119748A4200FAD1AF /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2D19748A4200FAD1AF /* drop.mp3 */; };
 		93F90C3219748A4200FAD1AF /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2E19748A4200FAD1AF /* gameover.mp3 */; };
@@ -47,7 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		93F90C2A1974837700FAD1AF /* warrior.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = warrior.mp3; sourceTree = "<group>"; };
 		93F90C2C19748A4200FAD1AF /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		93F90C2D19748A4200FAD1AF /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
 		93F90C2E19748A4200FAD1AF /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 				F61D58E81972155600200A23 /* Background@2x.png */,
 				F61D58E91972155600200A23 /* Background.png */,
 				E6DCF861196C576A00F72602 /* Info.plist */,
-				93F90C2A1974837700FAD1AF /* warrior.mp3 */,
 				93F90C2C19748A4200FAD1AF /* bomb.mp3 */,
 				93F90C2D19748A4200FAD1AF /* drop.mp3 */,
 				93F90C2E19748A4200FAD1AF /* gameover.mp3 */,
@@ -272,7 +269,6 @@
 				F61D58EA1972155600200A23 /* Background@2x.png in Resources */,
 				E61E2D3B19748856001021D9 /* Theme.mp3 in Resources */,
 				E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */,
-				93F90C2B1974837700FAD1AF /* warrior.mp3 in Resources */,
 				93F90C3219748A4200FAD1AF /* gameover.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
