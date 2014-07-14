@@ -13,6 +13,8 @@ let BlockSize:CGFloat = 20.0
 let TickLengthLevelOne = NSTimeInterval(600)
 
 class GameScene: SKScene {
+    var themeAction:SKAction?
+    
     var tickLengthMillis = TickLengthLevelOne
     
     let gameLayer = SKNode()
@@ -51,6 +53,9 @@ class GameScene: SKScene {
         shapeLayer.position = layerPosition
         shapeLayer.addChild(map)
         gameLayer.addChild(shapeLayer)
+        
+        themeAction = SKAction.repeatActionForever(SKAction.playSoundFileNamed("Theme.mp3", waitForCompletion: true))
+        runAction(themeAction)
     }
     
    
@@ -130,7 +135,7 @@ class GameScene: SKScene {
                 var point = pointForColumn(block.column, row: block.row)
                 point = CGPointMake(point.x + (goLeft ? -randomRadius : randomRadius), point.y)
                 
-                let randomDuration = NSTimeInterval(arc4random_uniform(3)) + 1
+                let randomDuration = NSTimeInterval(arc4random_uniform(2)) + 0.5
                 var startAngle = CGFloat(M_PI)
                 var endAngle = startAngle * 2
                 if goLeft {

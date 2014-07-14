@@ -12,6 +12,7 @@
 		93F90C3119748A4200FAD1AF /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2D19748A4200FAD1AF /* drop.mp3 */; };
 		93F90C3219748A4200FAD1AF /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2E19748A4200FAD1AF /* gameover.mp3 */; };
 		93F90C3319748A4200FAD1AF /* levelup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93F90C2F19748A4200FAD1AF /* levelup.mp3 */; };
+		E61E2D3B19748856001021D9 /* Theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E61E2D3A19748856001021D9 /* Theme.mp3 */; };
 		E64668BC19709B2E006D362A /* ZigZagTwoShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64668BB19709B2E006D362A /* ZigZagTwoShape.swift */; };
 		E64668BE19709CE9006D362A /* LOneShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64668BD19709CE9006D362A /* LOneShape.swift */; };
 		E64668C01970A065006D362A /* LTwoShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64668BF1970A064006D362A /* LTwoShape.swift */; };
@@ -51,6 +52,7 @@
 		93F90C2D19748A4200FAD1AF /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
 		93F90C2E19748A4200FAD1AF /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
 		93F90C2F19748A4200FAD1AF /* levelup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelup.mp3; sourceTree = "<group>"; };
+		E61E2D3A19748856001021D9 /* Theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Theme.mp3; sourceTree = "<group>"; };
 		E64668BB19709B2E006D362A /* ZigZagTwoShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZigZagTwoShape.swift; sourceTree = "<group>"; };
 		E64668BD19709CE9006D362A /* LOneShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LOneShape.swift; sourceTree = "<group>"; };
 		E64668BF1970A064006D362A /* LTwoShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTwoShape.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E61E2D3919748856001021D9 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E61E2D3A19748856001021D9 /* Theme.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		E6DCF854196C576A00F72602 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +144,7 @@
 				E64668BF1970A064006D362A /* LTwoShape.swift */,
 				E6DCF86A196C576B00F72602 /* Main.storyboard */,
 				E6DCF86D196C576B00F72602 /* Images.xcassets */,
+				E61E2D3919748856001021D9 /* Sounds */,
 				E65E4C0B196C65AD001B3736 /* Sprites.atlas */,
 				E6DCF860196C576A00F72602 /* Supporting Files */,
 			);
@@ -259,6 +270,7 @@
 				93F90C3119748A4200FAD1AF /* drop.mp3 in Resources */,
 				93F90C3019748A4200FAD1AF /* bomb.mp3 in Resources */,
 				F61D58EA1972155600200A23 /* Background@2x.png in Resources */,
+				E61E2D3B19748856001021D9 /* Theme.mp3 in Resources */,
 				E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */,
 				93F90C2B1974837700FAD1AF /* warrior.mp3 in Resources */,
 				93F90C3219748A4200FAD1AF /* gameover.mp3 in Resources */,
