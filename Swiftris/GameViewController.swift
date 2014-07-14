@@ -10,7 +10,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,12 +54,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
         let currentPoint = sender.translationInView(self.view)
         if let originalPoint = panPointReference {
-            if abs(currentPoint.x - originalPoint.x) > BlockSize {
+            if abs(currentPoint.x - originalPoint.x) > (BlockSize * 0.9) {
                 if currentPoint.x > originalPoint.x {
-                    if sender.velocityInView(self.view).x > CGFloat(0) {
+                    if sender.translationInView(self.view).x > CGFloat(0) {
                         swiftris.moveShapeRight()
                     }
-                } else if sender.velocityInView(self.view).x < CGFloat(0) {
+                } else if sender.translationInView(self.view).x < CGFloat(0) {
                     swiftris.moveShapeLeft()
                 }
                 panPointReference = currentPoint
@@ -134,6 +134,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     func gameDidEnd(swiftris: Swiftris) {
         self.view.userInteractionEnabled = false
         scene.stopTicking()
+        scene.playSound("gameover.mp3")
         scene.animateCollapsingLines(swiftris.removeAllBlocks(), fallenBlocks: Array<Array<Block>>()) {
             swiftris.beginGame()
         }
@@ -148,6 +149,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
             scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks) {
                 self.gamePieceDidLand(swiftris)
             }
+            scene.playSound("bomb.mp3")
         } else {
             newBlocks()
         }
@@ -161,6 +163,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         scene.redrawShape(swiftris.fallingShape!) {
             self.didTick()
         }
+        scene.playSound("drop.mp3")
     }
     
     func gameDidLevelUp(swiftris: Swiftris) {
@@ -168,5 +171,6 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         if scene.tickLengthMillis >= 200 {
             scene.tickLengthMillis -= 100
         }
+        scene.playSound("levelup.mp3")
     }
 }
