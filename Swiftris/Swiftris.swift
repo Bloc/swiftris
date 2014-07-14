@@ -8,7 +8,6 @@ let PreviewColumn = 12
 let PreviewRow = 18
 
 let PointsPerLine = 10
-
 let LevelThreshold = 1000
 
 protocol SwiftrisDelegate {
