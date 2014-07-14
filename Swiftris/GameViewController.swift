@@ -54,12 +54,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         }
         let currentPoint = sender.translationInView(self.view)
         if let originalPoint = panPointReference {
-            if abs(currentPoint.x - originalPoint.x) > BlockSize {
+            if abs(currentPoint.x - originalPoint.x) > (BlockSize * 0.9) {
                 if currentPoint.x > originalPoint.x {
-                    if sender.velocityInView(self.view).x > CGFloat(0) {
+                    if sender.translationInView(self.view).x > CGFloat(0) {
                         swiftris.moveShapeRight()
                     }
-                } else if sender.velocityInView(self.view).x < CGFloat(0) {
+                } else if sender.translationInView(self.view).x < CGFloat(0) {
                     swiftris.moveShapeLeft()
                 }
                 panPointReference = currentPoint
