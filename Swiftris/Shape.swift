@@ -144,15 +144,15 @@ class Shape: Hashable, Printable {
     }
     
     @final func rotateClockwise() {
-        let newOritentation = Orientation.rotate(orientation, clockwise: true)
-        rotateBlocks(newOritentation)
-        orientation = newOritentation
+        let newOrientation = Orientation.rotate(orientation, clockwise: true)
+        rotateBlocks(newOrientation)
+        orientation = newOrientation
     }
     
     @final func rotateCounterClockwise() {
-        let newOritentation = Orientation.rotate(orientation, clockwise: false)
-        rotateBlocks(newOritentation)
-        orientation = newOritentation
+        let newOrientation = Orientation.rotate(orientation, clockwise: false)
+        rotateBlocks(newOrientation)
+        orientation = newOrientation
     }
     
     @final func lowerShapeByOneRow() {
