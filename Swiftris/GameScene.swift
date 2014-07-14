@@ -75,7 +75,7 @@ class GameScene: SKScene {
         lastTick = nil
     }
     
-    func addShapeToScene(shape:Shape, completion:() -> ()) {
+    func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
         for (idx, block) in enumerate(shape.blocks) {
             var texture = textureCache[block.spriteName]
             if texture == nil {
@@ -91,8 +91,7 @@ class GameScene: SKScene {
             sprite.alpha = 0
             let moveAction = SKAction.moveTo(pointForColumn(block.column, row: block.row), duration: NSTimeInterval(0.2))
             moveAction.timingMode = .EaseOut
-            let fadeTo:CGFloat = block.row >= NumRows ? 0.5 : 1.0
-            let fadeInAction = SKAction.fadeAlphaTo(fadeTo, duration: NSTimeInterval(0.4))
+            let fadeInAction = SKAction.fadeAlphaTo(0.7, duration: NSTimeInterval(0.4))
             fadeInAction.timingMode = .EaseOut
             sprite.runAction(SKAction.group([moveAction, fadeInAction]))
         }
@@ -119,7 +118,6 @@ class GameScene: SKScene {
             }
         }
         
-        // TODO improve if possible
         for (rowIdx, row) in enumerate(linesToRemove) {
             for (blockIdx, block) in enumerate(row) {
                 let randomRadius = CGFloat(arc4random_uniform(400) + 100)
@@ -154,6 +152,18 @@ class GameScene: SKScene {
         let x: CGFloat = (CGFloat(column) * BlockSize) + (BlockSize / 2)
         let y: CGFloat = (CGFloat(row) * BlockSize) + (BlockSize / 2)
         return CGPointMake(x, y)
+    }
+    
+    func movePreviewToShape(shape:Shape, completion:() -> ()) {
+        for (idx, block) in enumerate(shape.blocks) {
+            let sprite = block.sprite!
+            let moveTo = pointForColumn(block.column, row:block.row)
+            let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.2)
+            moveToAction.timingMode = .EaseOut
+            sprite.runAction(
+                SKAction.group([moveToAction, SKAction.fadeAlphaTo(1.0, duration: 0.2)]), completion:nil)
+        }
+        runAction(SKAction.waitForDuration(0.2), completion: completion)
     }
     
     func redrawShape(shape:Shape, completion:() -> ()) {

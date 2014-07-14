@@ -104,13 +104,16 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     // Switris Delegate
     
     func gameDidBegin(swiftris: Swiftris) {
-        scene.addShapeToScene(swiftris.nextShape!) {}
-        scene.addShapeToScene(swiftris.fallingShape!) {
-            self.swipeRec.enabled = true
-            self.panRec.enabled = true
-            self.tapRec.enabled = true
-            self.didTick()
-            self.scene.startTicking()
+        scene.addPreviewShapeToScene(swiftris.fallingShape!) {
+            self.scene.movePreviewToShape(swiftris.fallingShape!) {
+                self.scene.addPreviewShapeToScene(swiftris.nextShape!) {
+                    self.swipeRec.enabled = true
+                    self.panRec.enabled = true
+                    self.tapRec.enabled = true
+                    self.didTick()
+                    self.scene.startTicking()
+                }
+            }
         }
     }
     
@@ -119,33 +122,24 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         self.panRec.enabled = false
         self.tapRec.enabled = false
         scene.stopTicking()
-        scene.addShapeToScene(swiftris.fallingShape!) {}
+        
     }
     
     func gamePieceDidLand(swiftris: Swiftris) {
         scene.stopTicking()
+        self.view.userInteractionEnabled = false
         let removedLines = swiftris.removeCompletedLines()
         if removedLines.linesRemoved.count > 0 {
             swiftris.score += PointsPerLine * removedLines.linesRemoved.count
             scene.animateCollapsingLines(removedLines.linesRemoved, fallenBlocks:removedLines.fallenBlocks) {
-                if swiftris.hasCompletedLines() {
-                    self.gamePieceDidLand(swiftris)
-                } else {
-                    let newShapes = swiftris.newShape()
-                    if let fallingShape = newShapes.fallingShape {
-                        self.scene.redrawShape(fallingShape) {
-                            self.scene.addShapeToScene(newShapes.nextShape!) {
-                                self.scene.startTicking()
-                            }
-                        }
-                    }
-                }
+                self.gamePieceDidLand(swiftris)
             }
         } else {
             let newShapes = swiftris.newShape()
             if let fallingShape = newShapes.fallingShape {
-                self.scene.redrawShape(fallingShape) {
-                    self.scene.addShapeToScene(newShapes.nextShape!) {
+                self.scene.movePreviewToShape(fallingShape) {
+                    self.view.userInteractionEnabled = true
+                    self.scene.addPreviewShapeToScene(newShapes.nextShape!) {
                         self.scene.startTicking()
                     }
                 }

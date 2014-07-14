@@ -1,8 +1,11 @@
-let NumColumns:Int = 10
-let NumRows:Int = 20
+let NumColumns = 10
+let NumRows = 20
 
-let StartingColumn:Int = 4
-let StartingRow:Int = NumRows - 1
+let StartingColumn = 4
+let StartingRow = 19
+
+let PreviewColumn = 12
+let PreviewRow = 18
 
 let PointsPerLine = 10
 
@@ -35,17 +38,15 @@ class Swiftris {
     
     func beginGame() {
         gameOver = false
+        nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
         newShape()
         delegate?.gameDidBegin(self)
     }
     
     func newShape() -> (fallingShape:Shape?, nextShape:Shape?) {
-        if nextShape == nil {
-            nextShape = Shape.random(11, startingRow: 18)
-        }
         fallingShape = nextShape
-        nextShape = Shape.random(11, startingRow: 18)
-        fallingShape?.shiftBy(-7, rows: 1)
+        nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
+        fallingShape?.moveTo(StartingColumn, row: StartingRow)
         if detectIllegalPlacement() {
             while detectOverlappingBlocks() {
                 fallingShape?.raiseShapeByOneRow()
@@ -72,13 +73,17 @@ class Swiftris {
         if let shape = fallingShape {
             shape.lowerShapeByOneRow()
             if detectIllegalPlacement() {
-              shape.raiseShapeByOneRow()
-              settleShape()
+                shape.raiseShapeByOneRow()
+                if detectIllegalPlacement() {
+                    delegate?.gameDidEnd(self)
+                } else {
+                    settleShape()
+                }
             } else if detectTouch() {
-              delegate?.gamePieceDidMove(self)
-              settleShape()
+                delegate?.gamePieceDidMove(self)
+                settleShape()
             } else {
-              delegate?.gamePieceDidMove(self)
+                delegate?.gamePieceDidMove(self)
             }
         }
     }
@@ -115,21 +120,6 @@ class Swiftris {
             }
             delegate?.gamePieceDidMove(self)
         }
-    }
-  
-    func hasCompletedLines() -> Bool {
-        for row in 0..<NumRows {
-            var rowOfBlocks = Array<Block>()
-            for column in 0..<NumColumns {
-                if let block = blockArray[column, row] {
-                    rowOfBlocks.append(block)
-                }
-            }
-            if rowOfBlocks.count == NumColumns {
-                return true
-            }
-        }
-        return false
     }
     
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
