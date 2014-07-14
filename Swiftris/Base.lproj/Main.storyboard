@@ -16,6 +16,40 @@
                     <view key="view" contentMode="scaleToFill" id="bdc-N1-crn" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-zE-WXm">
+                                <rect key="frame" x="235" y="125" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="999999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoG-Ms-AEY">
+                                <rect key="frame" x="228" y="154" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mn2-RC-Bz5">
+                                <rect key="frame" x="235" y="196" width="70" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="999999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlk-xM-8SQ">
+                                <rect key="frame" x="228" y="225" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
@@ -30,25 +64,27 @@
                         <size key="landscapeSize" width="568" height="320"/>
                     </simulatedScreenMetrics>
                     <connections>
+                        <outlet property="labelLevel" destination="Zlk-xM-8SQ" id="4Sg-JR-R8y"/>
+                        <outlet property="labelScore" destination="AoG-Ms-AEY" id="7LL-ze-Adv"/>
                         <outlet property="panRec" destination="3TP-cA-4Ln" id="xqD-4g-t0H"/>
                         <outlet property="swipeRec" destination="Jce-Wm-tOj" id="hBM-xw-oG6"/>
                         <outlet property="tapRec" destination="Ywg-Pz-t2P" id="TpN-I0-M9k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer enabled="NO" direction="down" id="Jce-Wm-tOj">
+                <swipeGestureRecognizer direction="down" id="Jce-Wm-tOj">
                     <connections>
                         <action selector="didSwipe:" destination="LVB-YS-i5n" id="6gs-LW-TWe"/>
                         <outlet property="delegate" destination="LVB-YS-i5n" id="hOL-BR-iXQ"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <panGestureRecognizer enabled="NO" minimumNumberOfTouches="1" id="3TP-cA-4Ln">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3TP-cA-4Ln">
                     <connections>
                         <action selector="didPan:" destination="LVB-YS-i5n" id="sAs-Oa-5MA"/>
                         <outlet property="delegate" destination="LVB-YS-i5n" id="AM9-4t-KPx"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer enabled="NO" id="Ywg-Pz-t2P">
+                <tapGestureRecognizer id="Ywg-Pz-t2P">
                     <connections>
                         <action selector="didTap:" destination="LVB-YS-i5n" id="rTW-9L-bhr"/>
                         <outlet property="delegate" destination="LVB-YS-i5n" id="1IB-CE-vwF"/>

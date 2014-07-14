@@ -9,37 +9,44 @@ let PreviewRow = 18
 
 let PointsPerLine = 10
 
+let LevelThreshold = 1000
+
 protocol SwiftrisDelegate {
     func gameDidEnd(swiftris: Swiftris)
     func gameDidBegin(swiftris: Swiftris)
     func gamePieceDidLand(swiftris: Swiftris)
     func gamePieceDidMove(swiftris: Swiftris)
     func gamePieceDidDrop(swiftris: Swiftris)
+    func gameDidLevelUp(swiftris: Swiftris)
 }
 
 class Swiftris {
     var blockArray:Array2D<Block>
-  
     var nextShape:Shape?
-  
     var fallingShape:Shape?
-    
     var delegate:SwiftrisDelegate?
     
-    var score:Int = 0
+    var score:Int
+    var levelThreshold:Int
+    var level:Int
     
     var gameOver:Bool
     
     init() {
+        score = 0
+        levelThreshold = 0
+        level = 1
         gameOver = true
         fallingShape = nil
+        nextShape = nil
         blockArray = Array2D<Block>(columns: NumColumns, rows: NumRows)
     }
     
     func beginGame() {
         gameOver = false
-        nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
-        newShape()
+        if (nextShape == nil) {
+            nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
+        }
         delegate?.gameDidBegin(self)
     }
     
@@ -48,9 +55,8 @@ class Swiftris {
         nextShape = Shape.random(PreviewColumn, startingRow: PreviewRow)
         fallingShape?.moveTo(StartingColumn, row: StartingRow)
         if detectIllegalPlacement() {
-            while detectOverlappingBlocks() {
-                fallingShape?.raiseShapeByOneRow()
-            }
+            nextShape = fallingShape
+            nextShape!.moveTo(PreviewColumn, row: PreviewRow)
             endGame()
             return (nil, nil)
         }
@@ -75,7 +81,7 @@ class Swiftris {
             if detectIllegalPlacement() {
                 shape.raiseShapeByOneRow()
                 if detectIllegalPlacement() {
-                    delegate?.gameDidEnd(self)
+                    endGame()
                 } else {
                     settleShape()
                 }
@@ -122,6 +128,21 @@ class Swiftris {
         }
     }
     
+    func removeAllBlocks() -> Array<Array<Block>> {
+        var allBlocks = Array<Array<Block>>()
+        for row in 0..<NumRows {
+            var rowOfBlocks = Array<Block>()
+            for column in 0..<NumColumns {
+                if let block = blockArray[column, row] {
+                    rowOfBlocks.append(block)
+                    blockArray[column, row] = nil
+                }
+            }
+            allBlocks.append(rowOfBlocks)
+        }
+        return allBlocks
+    }
+    
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
         var removedLines = Array<Array<Block>>()
         for row in 0..<NumRows {
@@ -141,6 +162,15 @@ class Swiftris {
         
         if removedLines.count == 0 {
             return ([], [])
+        } else {
+            let pointsEarned = removedLines.count * PointsPerLine * level
+            score += pointsEarned
+            levelThreshold += pointsEarned
+            if levelThreshold >= LevelThreshold {
+                level += 1
+                levelThreshold -= LevelThreshold
+                delegate?.gameDidLevelUp(self)
+            }
         }
         
         var fallenBlocks = Array<Array<Block>>()
@@ -225,6 +255,9 @@ class Swiftris {
     
     // Private
     func endGame() {
+        score = 0
+        level = 1
+        levelThreshold = 0
         gameOver = true
         delegate?.gameDidEnd(self)
     }

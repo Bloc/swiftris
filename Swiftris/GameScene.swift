@@ -10,8 +10,10 @@ import SpriteKit
 
 let BlockSize:CGFloat = 20.0
 
+let TickLengthLevelOne = NSTimeInterval(600)
+
 class GameScene: SKScene {
-    let TickLengthMillis = NSTimeInterval(600)
+    var tickLengthMillis = TickLengthLevelOne
     
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
@@ -37,7 +39,6 @@ class GameScene: SKScene {
         let layerPosition = CGPoint(
             x: -BlockSize * 7,
             y: -BlockSize * 9)
-        println(layerPosition)
 
       
         let color:UIColor = UIColor(red: CGFloat(255), green: CGFloat(255), blue: CGFloat(255), alpha: CGFloat(0.5))
@@ -45,15 +46,11 @@ class GameScene: SKScene {
         map.anchorPoint = CGPoint(x:0, y:0)
         map.position = CGPoint(x:0, y:0)
         
-//        gameLayer.addChild(map)
         shapeLayer.position = layerPosition
         shapeLayer.addChild(map)
         gameLayer.addChild(shapeLayer)
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-    }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
@@ -61,7 +58,7 @@ class GameScene: SKScene {
             return
         }
         var timePassed = lastTick!.timeIntervalSinceNow * -1000.0
-        if timePassed > TickLengthMillis {
+        if timePassed > tickLengthMillis {
             lastTick = NSDate.date()
             tick?()
         }
@@ -154,7 +151,7 @@ class GameScene: SKScene {
         return CGPointMake(x, y)
     }
     
-    func movePreviewToShape(shape:Shape, completion:() -> ()) {
+    func movePreviewShape(shape:Shape, completion:() -> ()) {
         for (idx, block) in enumerate(shape.blocks) {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
