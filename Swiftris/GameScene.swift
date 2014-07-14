@@ -26,6 +26,8 @@ class GameScene: SKScene {
     
     var lastTick:NSDate?
     
+    var soundAction:SKAction?
+    
     init(size: CGSize) {
         super.init(size: size)
         
@@ -70,6 +72,11 @@ class GameScene: SKScene {
     
     func stopTicking() {
         lastTick = nil
+    }
+    
+    func playSound(sound:String) {
+        self.soundAction = SKAction.playSoundFileNamed(sound, waitForCompletion: false)
+        runAction(self.soundAction)
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
