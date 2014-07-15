@@ -1,58 +1,40 @@
 import SpriteKit
 
-enum BlockStyle: Int {
-    case StyleOne, StyleTwo
-    
-    var prefix: String {
-        if self == .StyleOne {
-            return "Block-1"
-        } else {
-            return "Block-2"
-        }
-    }
-    
-    static func random() -> BlockStyle {
-        return BlockStyle.fromRaw(Int(arc4random_uniform(2)))!
-    }
-}
+let NumberOfColors: UInt32 = 6
 
 enum BlockColor: Int, Printable {
-    case Blue = 0, Red, Green, Yellow
+  
+    case Blue = 0, Orange, Purple, Red, Teal, Yellow
     
-    var postfix: String {
+    var spriteName: String {
         switch self {
         case .Blue:
-            return "-Blue"
+            return "blue"
+        case .Orange:
+          return "orange"
+        case .Purple:
+          return "purple"
         case .Red:
-            return "-Red"
-        case .Green:
-            return "-Green"
+            return "red"
+        case .Teal:
+          return "teal"
         case .Yellow:
-            return "-Yellow"
+            return "yellow"
         }
     }
     
     var description: String {
-        switch self {
-            case .Blue:
-                return "Blue"
-            case .Red:
-                return "Red"
-            case .Green:
-                return "Green"
-            case .Yellow:
-                return "Yellow"
-        }
+        return self.spriteName
     }
     
     static func random() -> BlockColor {
-        return BlockColor.fromRaw(Int(arc4random_uniform(4)))!
+        return BlockColor.fromRaw(Int(arc4random_uniform(NumberOfColors)))!
     }
 }
 
 class Block: Hashable, Printable {
     // Constants
-    let type: (style: BlockStyle, color: BlockColor)
+    let color: BlockColor
 
     // Variables
     var column: Int
@@ -62,7 +44,7 @@ class Block: Hashable, Printable {
     var sprite: SKSpriteNode?
     
     var spriteName: String {
-        return type.style.prefix + type.color.postfix
+        return color.description
     }
     
     var hashValue: Int {
@@ -70,20 +52,16 @@ class Block: Hashable, Printable {
     }
     
     var description: String {
-        return "\(type.color) (\(column), \(row))"
+        return "\(color) (\(column), \(row))"
     }
     
-    init(column:Int, row:Int, style:BlockStyle, color:BlockColor) {
+    init(column:Int, row:Int, color:BlockColor) {
         self.column = column
         self.row = row
-        self.type = (style, color)
-    }
-    
-    convenience init(column:Int, row:Int, color:BlockColor) {
-        self.init(column:column, row:row, style:BlockStyle.random(), color:color)
+        self.color = color
     }
 }
 
 func ==(lhs: Block, rhs: Block) -> Bool {
-    return lhs.column == rhs.column && lhs.row == rhs.row
+    return lhs.column == rhs.column && lhs.row == rhs.row && lhs.color.toRaw() == rhs.color.toRaw()
 }

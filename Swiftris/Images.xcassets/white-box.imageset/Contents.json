@@ -6,12 +6,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Background.png"
+      "filename" : "white-box.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Background@2x.png"
+      "filename" : "white-box@2x.png"
     }
   ],
   "info" : {

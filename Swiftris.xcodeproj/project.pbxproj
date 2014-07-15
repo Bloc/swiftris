@@ -16,8 +16,6 @@
 		E64668BE19709CE9006D362A /* LOneShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64668BD19709CE9006D362A /* LOneShape.swift */; };
 		E64668C01970A065006D362A /* LTwoShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64668BF1970A064006D362A /* LTwoShape.swift */; };
 		E652BB571970876E00B14EE9 /* ZigZagOneShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E652BB561970876E00B14EE9 /* ZigZagOneShape.swift */; };
-		E65E4C0C196C65AD001B3736 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E65E4C0B196C65AD001B3736 /* Sprites.atlas */; };
-		E65E4C10196C66C6001B3736 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E4C0E196C66C6001B3736 /* Set.swift */; };
 		E66E351F196C6EA400791C4D /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E351E196C6EA400791C4D /* Block.swift */; };
 		E66E3521196C6FA100791C4D /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E3520196C6FA100791C4D /* Shape.swift */; };
 		E6A13112196C7CE900488E3F /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A13111196C7CE900488E3F /* SquareShape.swift */; };
@@ -31,8 +29,13 @@
 		E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DCF86A196C576B00F72602 /* Main.storyboard */; };
 		E6DCF86E196C576B00F72602 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DCF86D196C576B00F72602 /* Images.xcassets */; };
 		E6DCF87A196C576B00F72602 /* SwiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DCF879196C576B00F72602 /* SwiftrisTests.swift */; };
-		F61D58EA1972155600200A23 /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F61D58E81972155600200A23 /* Background@2x.png */; };
-		F61D58EB1972155600200A23 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = F61D58E91972155600200A23 /* Background.png */; };
+		F63754421975BE9900369BE5 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F63754411975BE9900369BE5 /* Sprites.atlas */; };
+		F6A24E1E1975D6CE009EBD09 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A24E181975D6CE009EBD09 /* background.png */; };
+		F6A24E1F1975D6CE009EBD09 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A24E191975D6CE009EBD09 /* background@2x.png */; };
+		F6A24E201975D6CE009EBD09 /* gameboard.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A24E1A1975D6CE009EBD09 /* gameboard.png */; };
+		F6A24E211975D6CE009EBD09 /* gameboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A24E1B1975D6CE009EBD09 /* gameboard@2x.png */; };
+		F6A24E221975D6CE009EBD09 /* white-box.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A24E1C1975D6CE009EBD09 /* white-box.png */; };
+		F6A24E231975D6CE009EBD09 /* white-box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A24E1D1975D6CE009EBD09 /* white-box@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +58,6 @@
 		E64668BD19709CE9006D362A /* LOneShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LOneShape.swift; sourceTree = "<group>"; };
 		E64668BF1970A064006D362A /* LTwoShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTwoShape.swift; sourceTree = "<group>"; };
 		E652BB561970876E00B14EE9 /* ZigZagOneShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZigZagOneShape.swift; sourceTree = "<group>"; };
-		E65E4C0B196C65AD001B3736 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
-		E65E4C0E196C66C6001B3736 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		E66E351E196C6EA400791C4D /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		E66E3520196C6FA100791C4D /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		E6A13111196C7CE900488E3F /* SquareShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
@@ -74,8 +75,13 @@
 		E6DCF873196C576B00F72602 /* SwiftrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DCF878196C576B00F72602 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6DCF879196C576B00F72602 /* SwiftrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftrisTests.swift; sourceTree = "<group>"; };
-		F61D58E81972155600200A23 /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
-		F61D58E91972155600200A23 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		F63754411975BE9900369BE5 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
+		F6A24E181975D6CE009EBD09 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		F6A24E191975D6CE009EBD09 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		F6A24E1A1975D6CE009EBD09 /* gameboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameboard.png; sourceTree = "<group>"; };
+		F6A24E1B1975D6CE009EBD09 /* gameboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameboard@2x.png"; sourceTree = "<group>"; };
+		F6A24E1C1975D6CE009EBD09 /* white-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-box.png"; sourceTree = "<group>"; };
+		F6A24E1D1975D6CE009EBD09 /* white-box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-box@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +140,6 @@
 				E6DCF866196C576A00F72602 /* GameScene.swift */,
 				E6DCF868196C576A00F72602 /* GameViewController.swift */,
 				E6A13113196C911E00488E3F /* Swiftris.swift */,
-				E65E4C0E196C66C6001B3736 /* Set.swift */,
 				E66E351E196C6EA400791C4D /* Block.swift */,
 				E66E3520196C6FA100791C4D /* Shape.swift */,
 				E6A13111196C7CE900488E3F /* SquareShape.swift */,
@@ -146,8 +151,8 @@
 				E64668BF1970A064006D362A /* LTwoShape.swift */,
 				E6DCF86A196C576B00F72602 /* Main.storyboard */,
 				E6DCF86D196C576B00F72602 /* Images.xcassets */,
+				F63754411975BE9900369BE5 /* Sprites.atlas */,
 				E61E2D3919748856001021D9 /* Sounds */,
-				E65E4C0B196C65AD001B3736 /* Sprites.atlas */,
 				E6DCF860196C576A00F72602 /* Supporting Files */,
 			);
 			path = Swiftris;
@@ -156,8 +161,12 @@
 		E6DCF860196C576A00F72602 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F61D58E81972155600200A23 /* Background@2x.png */,
-				F61D58E91972155600200A23 /* Background.png */,
+				F6A24E181975D6CE009EBD09 /* background.png */,
+				F6A24E191975D6CE009EBD09 /* background@2x.png */,
+				F6A24E1A1975D6CE009EBD09 /* gameboard.png */,
+				F6A24E1B1975D6CE009EBD09 /* gameboard@2x.png */,
+				F6A24E1C1975D6CE009EBD09 /* white-box.png */,
+				F6A24E1D1975D6CE009EBD09 /* white-box@2x.png */,
 				E6DCF861196C576A00F72602 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -260,15 +269,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E65E4C0C196C65AD001B3736 /* Sprites.atlas in Resources */,
+				F6A24E221975D6CE009EBD09 /* white-box.png in Resources */,
 				E6DCF86E196C576B00F72602 /* Images.xcassets in Resources */,
 				E644DE1219749CA60018B14C /* levelup.mp3 in Resources */,
-				F61D58EB1972155600200A23 /* Background.png in Resources */,
 				E644DE1019749CA60018B14C /* drop.mp3 in Resources */,
+				F6A24E231975D6CE009EBD09 /* white-box@2x.png in Resources */,
+				F6A24E211975D6CE009EBD09 /* gameboard@2x.png in Resources */,
+				F63754421975BE9900369BE5 /* Sprites.atlas in Resources */,
 				E644DE0F19749CA60018B14C /* bomb.mp3 in Resources */,
-				F61D58EA1972155600200A23 /* Background@2x.png in Resources */,
 				E61E2D3B19748856001021D9 /* Theme.mp3 in Resources */,
 				E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */,
+				F6A24E1E1975D6CE009EBD09 /* background.png in Resources */,
+				F6A24E1F1975D6CE009EBD09 /* background@2x.png in Resources */,
+				F6A24E201975D6CE009EBD09 /* gameboard.png in Resources */,
 				E644DE1119749CA60018B14C /* gameover.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +304,6 @@
 				E64668C01970A065006D362A /* LTwoShape.swift in Sources */,
 				E64668BE19709CE9006D362A /* LOneShape.swift in Sources */,
 				E6A13112196C7CE900488E3F /* SquareShape.swift in Sources */,
-				E65E4C10196C66C6001B3736 /* Set.swift in Sources */,
 				E6DCF867196C576A00F72602 /* GameScene.swift in Sources */,
 				E66E3521196C6FA100791C4D /* Shape.swift in Sources */,
 				E652BB571970876E00B14EE9 /* ZigZagOneShape.swift in Sources */,

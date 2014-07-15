@@ -13,13 +13,14 @@ let BlockSize:CGFloat = 20.0
 let TickLengthLevelOne = NSTimeInterval(600)
 
 class GameScene: SKScene {
-    var themeAction:SKAction?
-    
-    var tickLengthMillis = TickLengthLevelOne
-    
     let gameLayer = SKNode()
     let shapeLayer = SKNode()
-    
+    let LayerPosition = CGPoint(x: 6, y: -6)
+
+    var themeAction:SKAction?
+  
+    var tickLengthMillis = TickLengthLevelOne
+  
     var textureCache = Dictionary<String, SKTexture>()
     
     var tick:(() -> ())?
@@ -33,25 +34,22 @@ class GameScene: SKScene {
     init(size: CGSize) {
         super.init(size: size)
         
-        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        anchorPoint = CGPoint(x: 0, y: 1.0)
         
-        let background = SKSpriteNode(imageNamed: "Background")
+        let background = SKSpriteNode(imageNamed: "background")
+        background.position = CGPoint(x: 0, y: 0)
+        background.anchorPoint = CGPoint(x: 0, y: 1.0)
         addChild(background)
         
         addChild(gameLayer)
-        
-        let layerPosition = CGPoint(
-            x: -BlockSize * 7,
-            y: -BlockSize * 9)
-
       
-        let color:UIColor = UIColor(red: CGFloat(255), green: CGFloat(255), blue: CGFloat(255), alpha: CGFloat(0.5))
-        let map = SKSpriteNode(color: color, size:CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
-        map.anchorPoint = CGPoint(x:0, y:0)
-        map.position = CGPoint(x:0, y:0)
+        let gameBoardTexture = SKTexture(imageNamed: "gameboard")
+        let gameBoard = SKSpriteNode(texture: gameBoardTexture, size: CGSizeMake(BlockSize * CGFloat(NumColumns), BlockSize * CGFloat(NumRows)))
+        gameBoard.anchorPoint = CGPoint(x:0, y:1.0)
+        gameBoard.position = LayerPosition
         
-        shapeLayer.position = layerPosition
-        shapeLayer.addChild(map)
+        shapeLayer.position = LayerPosition
+        shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
         themeAction = SKAction.repeatActionForever(SKAction.playSoundFileNamed("Theme.mp3", waitForCompletion: true))
@@ -70,7 +68,13 @@ class GameScene: SKScene {
             tick?()
         }
     }
-    
+  
+    func pointForColumn(column: Int, row: Int) -> CGPoint {
+        let x: CGFloat = LayerPosition.x + (CGFloat(column) * BlockSize) + (BlockSize / 2)
+        let y: CGFloat = LayerPosition.y + (CGFloat(NumRows - row) * -BlockSize) + (BlockSize / 2)
+        return CGPointMake(x, y)
+    }
+  
     func startTicking() {
         lastTick = NSDate.date()
     }
@@ -155,12 +159,6 @@ class GameScene: SKScene {
         }
         
         runAction(SKAction.waitForDuration(longestDuration), completion:completion)
-    }
-    
-    func pointForColumn(column: Int, row: Int) -> CGPoint {
-        let x: CGFloat = (CGFloat(column) * BlockSize) + (BlockSize / 2)
-        let y: CGFloat = (CGFloat(row) * BlockSize) + (BlockSize / 2)
-        return CGPointMake(x, y)
     }
     
     func movePreviewShape(shape:Shape, completion:() -> ()) {
