@@ -156,11 +156,11 @@ class Shape: Hashable, Printable {
     }
     
     @final func lowerShapeByOneRow() {
-        shiftBy(0, rows:-1)
+        shiftBy(0, rows:1)
     }
     
     @final func raiseShapeByOneRow() {
-        shiftBy(0, rows:1)
+        shiftBy(0, rows:-1)
     }
     
     @final func shiftRightByOneColumn() {

@@ -2,10 +2,10 @@ let NumColumns = 10
 let NumRows = 20
 
 let StartingColumn = 4
-let StartingRow = 19
+let StartingRow = 0
 
 let PreviewColumn = 12
-let PreviewRow = 18
+let PreviewRow = 1
 
 let PointsPerLine = 10
 let LevelThreshold = 1000
@@ -144,7 +144,7 @@ class Swiftris {
     
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
         var removedLines = Array<Array<Block>>()
-        for row in 0..<NumRows {
+        for var row = NumRows - 1; row > 0; row-- {
             var rowOfBlocks = Array<Block>()
             for column in 0..<NumColumns {
                 if let block = blockArray[column, row] {
@@ -175,11 +175,11 @@ class Swiftris {
         var fallenBlocks = Array<Array<Block>>()
         for column in 0..<NumColumns {
             var fallenBlocksArray = Array<Block>()
-            for row in removedLines[0][0].row + 1..<NumRows {
+            for var row = removedLines[0][0].row - 1; row > 0; row-- {
                 if let block = blockArray[column, row] {
                     var newRow = row
-                    while (newRow > 0 && blockArray[column, newRow - 1] == nil) {
-                        newRow--
+                    while (newRow < NumRows - 1 && blockArray[column, newRow + 1] == nil) {
+                        newRow++
                     }
                     block.row = newRow
                     blockArray[column, row] = nil
@@ -243,8 +243,8 @@ class Swiftris {
     func detectTouch() -> Bool {
         if let shape = fallingShape {
             for bottomBlock in shape.bottomBlocks {
-                if bottomBlock.row == 0 ||
-                    blockArray[bottomBlock.column, bottomBlock.row - 1] != nil {
+                if bottomBlock.row == NumRows - 1 ||
+                    blockArray[bottomBlock.column, bottomBlock.row + 1] != nil {
                     return true
                 }
             }
