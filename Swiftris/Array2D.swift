@@ -21,7 +21,7 @@ class Array2D<T> {
         get {
             return array[(row * columns) + column]
         }
-        set {
+        set(newValue) {
             array[(row * columns) + column] = newValue
         }
     }
