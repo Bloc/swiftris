@@ -13,6 +13,7 @@
 		E644DE2B1974A2EE0018B14C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E644DE291974A2EE0018B14C /* Main.storyboard */; };
 		E644DE2D1974A2EE0018B14C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E644DE2C1974A2EE0018B14C /* Images.xcassets */; };
 		E644DE391974A2EE0018B14C /* SwiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644DE381974A2EE0018B14C /* SwiftrisTests.swift */; };
+		F646C31A19784EB000D209B5 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F646C31919784EB000D209B5 /* Array2D.swift */; };
 		F65F84DF197829F60050EF35 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F65F84DA197829F60050EF35 /* bomb.mp3 */; };
 		F65F84E0197829F60050EF35 /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F65F84DB197829F60050EF35 /* drop.mp3 */; };
 		F65F84E1197829F60050EF35 /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F65F84DC197829F60050EF35 /* gameover.mp3 */; };
@@ -48,6 +49,7 @@
 		E644DE321974A2EE0018B14C /* SwiftrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E644DE371974A2EE0018B14C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E644DE381974A2EE0018B14C /* SwiftrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftrisTests.swift; sourceTree = "<group>"; };
+		F646C31919784EB000D209B5 /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		F65F84DA197829F60050EF35 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		F65F84DB197829F60050EF35 /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
 		F65F84DC197829F60050EF35 /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				F65F84E4197829FF0050EF35 /* Sprites.atlas */,
 				F65F84D9197829F60050EF35 /* Sounds */,
 				E644DE1F1974A2ED0018B14C /* Supporting Files */,
+				F646C31919784EB000D209B5 /* Array2D.swift */,
 			);
 			path = Swiftris;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E644DE261974A2EE0018B14C /* GameScene.swift in Sources */,
+				F646C31A19784EB000D209B5 /* Array2D.swift in Sources */,
 				E644DE281974A2EE0018B14C /* GameViewController.swift in Sources */,
 				E644DE221974A2EE0018B14C /* AppDelegate.swift in Sources */,
 			);
