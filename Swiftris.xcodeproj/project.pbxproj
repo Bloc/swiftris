@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E61E2D3B19748856001021D9 /* Theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E61E2D3A19748856001021D9 /* Theme.mp3 */; };
+		E61E2D3B19748856001021D9 /* theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E61E2D3A19748856001021D9 /* theme.mp3 */; };
 		E644DE0F19749CA60018B14C /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E644DE0B19749CA60018B14C /* bomb.mp3 */; };
 		E644DE1019749CA60018B14C /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E644DE0C19749CA60018B14C /* drop.mp3 */; };
 		E644DE1119749CA60018B14C /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E644DE0D19749CA60018B14C /* gameover.mp3 */; };
@@ -49,7 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E61E2D3A19748856001021D9 /* Theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Theme.mp3; sourceTree = "<group>"; };
+		E61E2D3A19748856001021D9 /* theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theme.mp3; sourceTree = "<group>"; };
 		E644DE0B19749CA60018B14C /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		E644DE0C19749CA60018B14C /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
 		E644DE0D19749CA60018B14C /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 				E644DE0C19749CA60018B14C /* drop.mp3 */,
 				E644DE0D19749CA60018B14C /* gameover.mp3 */,
 				E644DE0E19749CA60018B14C /* levelup.mp3 */,
-				E61E2D3A19748856001021D9 /* Theme.mp3 */,
+				E61E2D3A19748856001021D9 /* theme.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -277,7 +277,7 @@
 				F6A24E211975D6CE009EBD09 /* gameboard@2x.png in Resources */,
 				F63754421975BE9900369BE5 /* Sprites.atlas in Resources */,
 				E644DE0F19749CA60018B14C /* bomb.mp3 in Resources */,
-				E61E2D3B19748856001021D9 /* Theme.mp3 in Resources */,
+				E61E2D3B19748856001021D9 /* theme.mp3 in Resources */,
 				E6DCF86C196C576B00F72602 /* Main.storyboard in Resources */,
 				F6A24E1E1975D6CE009EBD09 /* background.png in Resources */,
 				F6A24E1F1975D6CE009EBD09 /* background@2x.png in Resources */,

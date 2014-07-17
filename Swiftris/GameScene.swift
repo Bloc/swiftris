@@ -25,8 +25,6 @@ class GameScene: SKScene {
     
     var tick:(() -> ())?
     
-    var swiftris:Swiftris!
-    
     var lastTick:NSDate?
     
     var soundAction:SKAction?
@@ -52,7 +50,7 @@ class GameScene: SKScene {
         shapeLayer.addChild(gameBoard)
         gameLayer.addChild(shapeLayer)
         
-        themeAction = SKAction.repeatActionForever(SKAction.playSoundFileNamed("Theme.mp3", waitForCompletion: true))
+        themeAction = SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true))
         runAction(themeAction)
     }
     
