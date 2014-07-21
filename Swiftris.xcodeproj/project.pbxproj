@@ -13,14 +13,14 @@
 		E644DE2B1974A2EE0018B14C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E644DE291974A2EE0018B14C /* Main.storyboard */; };
 		E644DE2D1974A2EE0018B14C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E644DE2C1974A2EE0018B14C /* Images.xcassets */; };
 		E644DE391974A2EE0018B14C /* SwiftrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E644DE381974A2EE0018B14C /* SwiftrisTests.swift */; };
+		F6037D1A197DBFC6005331B5 /* JShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D16197DBFC6005331B5 /* JShape.swift */; };
+		F6037D1B197DBFC6005331B5 /* LShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D17197DBFC6005331B5 /* LShape.swift */; };
+		F6037D1C197DBFC6005331B5 /* SShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D18197DBFC6005331B5 /* SShape.swift */; };
+		F6037D1D197DBFC6005331B5 /* ZShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D19197DBFC6005331B5 /* ZShape.swift */; };
 		F61F20E7197C8ECB00A9986C /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20E6197C8ECB00A9986C /* Shape.swift */; };
 		F61F20E9197C992F00A9986C /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20E8197C992F00A9986C /* SquareShape.swift */; };
 		F61F20F0197C9EB300A9986C /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20EA197C9EB300A9986C /* LineShape.swift */; };
-		F61F20F1197C9EB300A9986C /* LOneShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20EB197C9EB300A9986C /* LOneShape.swift */; };
-		F61F20F2197C9EB300A9986C /* LTwoShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20EC197C9EB300A9986C /* LTwoShape.swift */; };
 		F61F20F3197C9EB300A9986C /* TShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20ED197C9EB300A9986C /* TShape.swift */; };
-		F61F20F4197C9EB300A9986C /* ZigZagOneShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20EE197C9EB300A9986C /* ZigZagOneShape.swift */; };
-		F61F20F5197C9EB300A9986C /* ZigZagTwoShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20EF197C9EB300A9986C /* ZigZagTwoShape.swift */; };
 		F646C31A19784EB000D209B5 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F646C31919784EB000D209B5 /* Array2D.swift */; };
 		F65F84DF197829F60050EF35 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F65F84DA197829F60050EF35 /* bomb.mp3 */; };
 		F65F84E0197829F60050EF35 /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F65F84DB197829F60050EF35 /* drop.mp3 */; };
@@ -58,14 +58,14 @@
 		E644DE321974A2EE0018B14C /* SwiftrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E644DE371974A2EE0018B14C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E644DE381974A2EE0018B14C /* SwiftrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftrisTests.swift; sourceTree = "<group>"; };
+		F6037D16197DBFC6005331B5 /* JShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JShape.swift; sourceTree = "<group>"; };
+		F6037D17197DBFC6005331B5 /* LShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LShape.swift; sourceTree = "<group>"; };
+		F6037D18197DBFC6005331B5 /* SShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SShape.swift; sourceTree = "<group>"; };
+		F6037D19197DBFC6005331B5 /* ZShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZShape.swift; sourceTree = "<group>"; };
 		F61F20E6197C8ECB00A9986C /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		F61F20E8197C992F00A9986C /* SquareShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
 		F61F20EA197C9EB300A9986C /* LineShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineShape.swift; sourceTree = "<group>"; };
-		F61F20EB197C9EB300A9986C /* LOneShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LOneShape.swift; sourceTree = "<group>"; };
-		F61F20EC197C9EB300A9986C /* LTwoShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTwoShape.swift; sourceTree = "<group>"; };
 		F61F20ED197C9EB300A9986C /* TShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TShape.swift; sourceTree = "<group>"; };
-		F61F20EE197C9EB300A9986C /* ZigZagOneShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZigZagOneShape.swift; sourceTree = "<group>"; };
-		F61F20EF197C9EB300A9986C /* ZigZagTwoShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZigZagTwoShape.swift; sourceTree = "<group>"; };
 		F646C31919784EB000D209B5 /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		F65F84DA197829F60050EF35 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		F65F84DB197829F60050EF35 /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
@@ -134,11 +134,11 @@
 				F61F20E6197C8ECB00A9986C /* Shape.swift */,
 				F61F20E8197C992F00A9986C /* SquareShape.swift */,
 				F61F20EA197C9EB300A9986C /* LineShape.swift */,
-				F61F20EB197C9EB300A9986C /* LOneShape.swift */,
-				F61F20EC197C9EB300A9986C /* LTwoShape.swift */,
 				F61F20ED197C9EB300A9986C /* TShape.swift */,
-				F61F20EE197C9EB300A9986C /* ZigZagOneShape.swift */,
-				F61F20EF197C9EB300A9986C /* ZigZagTwoShape.swift */,
+				F6037D16197DBFC6005331B5 /* JShape.swift */,
+				F6037D17197DBFC6005331B5 /* LShape.swift */,
+				F6037D18197DBFC6005331B5 /* SShape.swift */,
+				F6037D19197DBFC6005331B5 /* ZShape.swift */,
 			);
 			path = Swiftris;
 			sourceTree = "<group>";
@@ -299,16 +299,16 @@
 			files = (
 				F61F20E9197C992F00A9986C /* SquareShape.swift in Sources */,
 				E644DE261974A2EE0018B14C /* GameScene.swift in Sources */,
+				F6037D1A197DBFC6005331B5 /* JShape.swift in Sources */,
 				F61F20E7197C8ECB00A9986C /* Shape.swift in Sources */,
 				F61F20F3197C9EB300A9986C /* TShape.swift in Sources */,
-				F61F20F5197C9EB300A9986C /* ZigZagTwoShape.swift in Sources */,
 				F61F20F0197C9EB300A9986C /* LineShape.swift in Sources */,
+				F6037D1B197DBFC6005331B5 /* LShape.swift in Sources */,
+				F6037D1C197DBFC6005331B5 /* SShape.swift in Sources */,
 				F646C31A19784EB000D209B5 /* Array2D.swift in Sources */,
 				F663845119798F6F008B2C71 /* Block.swift in Sources */,
 				E644DE281974A2EE0018B14C /* GameViewController.swift in Sources */,
-				F61F20F2197C9EB300A9986C /* LTwoShape.swift in Sources */,
-				F61F20F1197C9EB300A9986C /* LOneShape.swift in Sources */,
-				F61F20F4197C9EB300A9986C /* ZigZagOneShape.swift in Sources */,
+				F6037D1D197DBFC6005331B5 /* ZShape.swift in Sources */,
 				E644DE221974A2EE0018B14C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

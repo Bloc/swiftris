@@ -1,4 +1,4 @@
-class ZigZagOneShape:Shape {
+class SShape:Shape {
     /*
     
     Orientation 0

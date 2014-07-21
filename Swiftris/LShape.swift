@@ -1,4 +1,4 @@
-class LOneShape:Shape {
+class LShape:Shape {
     /*
     
     Orientation 0

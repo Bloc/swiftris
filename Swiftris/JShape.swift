@@ -1,4 +1,4 @@
-class LTwoShape:Shape {
+class JShape:Shape {
     /*
     
     Orientation 0
