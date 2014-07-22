@@ -17,6 +17,7 @@
 		F6037D1B197DBFC6005331B5 /* LShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D17197DBFC6005331B5 /* LShape.swift */; };
 		F6037D1C197DBFC6005331B5 /* SShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D18197DBFC6005331B5 /* SShape.swift */; };
 		F6037D1D197DBFC6005331B5 /* ZShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D19197DBFC6005331B5 /* ZShape.swift */; };
+		F6037D1F197DC5DE005331B5 /* Swiftris.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6037D1E197DC5DE005331B5 /* Swiftris.swift */; };
 		F61F20E7197C8ECB00A9986C /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20E6197C8ECB00A9986C /* Shape.swift */; };
 		F61F20E9197C992F00A9986C /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20E8197C992F00A9986C /* SquareShape.swift */; };
 		F61F20F0197C9EB300A9986C /* LineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F20EA197C9EB300A9986C /* LineShape.swift */; };
@@ -62,6 +63,7 @@
 		F6037D17197DBFC6005331B5 /* LShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LShape.swift; sourceTree = "<group>"; };
 		F6037D18197DBFC6005331B5 /* SShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SShape.swift; sourceTree = "<group>"; };
 		F6037D19197DBFC6005331B5 /* ZShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZShape.swift; sourceTree = "<group>"; };
+		F6037D1E197DC5DE005331B5 /* Swiftris.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swiftris.swift; sourceTree = "<group>"; };
 		F61F20E6197C8ECB00A9986C /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		F61F20E8197C992F00A9986C /* SquareShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
 		F61F20EA197C9EB300A9986C /* LineShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineShape.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				F6037D17197DBFC6005331B5 /* LShape.swift */,
 				F6037D18197DBFC6005331B5 /* SShape.swift */,
 				F6037D19197DBFC6005331B5 /* ZShape.swift */,
+				F6037D1E197DC5DE005331B5 /* Swiftris.swift */,
 			);
 			path = Swiftris;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				E644DE261974A2EE0018B14C /* GameScene.swift in Sources */,
 				F6037D1A197DBFC6005331B5 /* JShape.swift in Sources */,
 				F61F20E7197C8ECB00A9986C /* Shape.swift in Sources */,
+				F6037D1F197DC5DE005331B5 /* Swiftris.swift in Sources */,
 				F61F20F3197C9EB300A9986C /* TShape.swift in Sources */,
 				F61F20F0197C9EB300A9986C /* LineShape.swift in Sources */,
 				F6037D1B197DBFC6005331B5 /* LShape.swift in Sources */,
