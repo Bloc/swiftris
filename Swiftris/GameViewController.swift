@@ -2,11 +2,11 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognizerDelegate {
-    @IBOutlet var swipeRec: UISwipeGestureRecognizer
-    @IBOutlet var panRec: UIPanGestureRecognizer
-    @IBOutlet var tapRec: UITapGestureRecognizer
-    @IBOutlet var labelScore: UILabel
-    @IBOutlet var labelLevel: UILabel
+    @IBOutlet var swipeRec: UISwipeGestureRecognizer!
+    @IBOutlet var panRec: UIPanGestureRecognizer!
+    @IBOutlet var tapRec: UITapGestureRecognizer!
+    @IBOutlet var labelScore: UILabel!
+    @IBOutlet var labelLevel: UILabel!
     var scene: GameScene!
     var swiftris:Swiftris!
     var panPointReference:CGPoint?

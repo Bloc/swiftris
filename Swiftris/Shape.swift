@@ -122,7 +122,7 @@ class Shape: Hashable, Printable {
         self.init(column:column, row:row, color:BlockColor.random(), orientation:Orientation.random())
     }
     
-    @final func initializeBlocks() {
+    final func initializeBlocks() {
         if let blockRowColumnTranslations:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] {
             for i in 0..<blockRowColumnTranslations.count {
                 let blockRow = row + blockRowColumnTranslations[i].rowDiff
@@ -134,7 +134,7 @@ class Shape: Hashable, Printable {
     }
     
     // Private
-    @final func rotateBlocks(orientation: Orientation) {
+    final func rotateBlocks(orientation: Orientation) {
         if let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] {
             for (idx, (columnDiff:Int, rowDiff:Int)) in enumerate(blockRowColumnTranslation) {
                 blocks[idx].column = column + columnDiff
@@ -143,35 +143,35 @@ class Shape: Hashable, Printable {
         }
     }
     
-    @final func rotateClockwise() {
+    final func rotateClockwise() {
         let newOrientation = Orientation.rotate(orientation, clockwise: true)
         rotateBlocks(newOrientation)
         orientation = newOrientation
     }
     
-    @final func rotateCounterClockwise() {
+    final func rotateCounterClockwise() {
         let newOrientation = Orientation.rotate(orientation, clockwise: false)
         rotateBlocks(newOrientation)
         orientation = newOrientation
     }
     
-    @final func lowerShapeByOneRow() {
+    final func lowerShapeByOneRow() {
         shiftBy(0, rows:1)
     }
     
-    @final func raiseShapeByOneRow() {
+    final func raiseShapeByOneRow() {
         shiftBy(0, rows:-1)
     }
     
-    @final func shiftRightByOneColumn() {
+    final func shiftRightByOneColumn() {
         shiftBy(1, rows:0)
     }
     
-    @final func shiftLeftByOneColumn() {
+    final func shiftLeftByOneColumn() {
         shiftBy(-1, rows:0)
     }
     
-    @final func shiftBy(columns: Int, rows: Int) {
+    final func shiftBy(columns: Int, rows: Int) {
         self.column += columns
         self.row += rows
         for block in blocks {
@@ -180,13 +180,13 @@ class Shape: Hashable, Printable {
         }
     }
   
-    @final func moveTo(column: Int, row:Int) {
+    final func moveTo(column: Int, row:Int) {
         self.column = column
         self.row = row
         rotateBlocks(orientation)
     }
   
-    @final class func random(startingColumn:Int, startingRow:Int) -> Shape {
+    final class func random(startingColumn:Int, startingRow:Int) -> Shape {
         switch Int(arc4random_uniform(NumShapeTypes)) {
         case 0:
             return SquareShape(column:startingColumn, row:startingRow)
