@@ -145,7 +145,7 @@ class GameScene: SKScene {
         
         for (rowIdx, row) in enumerate(linesToRemove) {
             for (blockIdx, block) in enumerate(row) {
-                let randomRadius = CGFloat(arc4random_uniform(400) + 100)
+                let randomRadius = CGFloat(UInt(arc4random_uniform(400) + 100))
                 let goLeft = arc4random_uniform(100) % 2 == 0
                 
                 var point = pointForColumn(block.column, row: block.row)
