@@ -5,7 +5,7 @@
 This repository maintains the completed source code indicative of the project you may build yourself by completing the [Swiftris Bloc Book](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift). Swiftris is a Tetris clone written entirely in **Swift** which employs **SpriteKit**. The organization of this project is as follows:
 
 | **File** | **Purpose** | **Layer** |
-| :--: | -- | :--: |
+| :---: | --- | :---: |
 | `Array2D.swift` | A custom Array class which supports a `[column, row]` subscript for accessing a grid | Logic |
 | `Block.swift` | Defines and represents a single square tile on the game board via column, row and color references | Logic |
 | `Shape.swift` | A base class which may represent a Tetromino. This class arranges four `Block` objects in an order defined by its subclasses. It also manages rotation, | Logic |
