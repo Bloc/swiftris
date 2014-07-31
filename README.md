@@ -2,7 +2,7 @@
 
 <center>[![](https://d1rn32hddkla48.cloudfront.net/assets/books/swiftris/whatyoubuild-b21c6fc044aa028515f362037954068a.gif)](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift)</center>
 
-This repository maintains the completed source code indicative of the project you may build yourself by completing the [Bloc's Swiftris book](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift). If you enjoyed Swiftris and would like to read more Bloc books, check out [Jottly.](https://www.bloc.io/build-your-first-website-with-html-and-css) Bloc's Jottly book teaches you how to build your very first website using HTML, CSS and the Skeleton framework.
+This repository maintains the completed source code indicative of the project you may build yourself by completing [Bloc's Swiftris book](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift). If you enjoyed Swiftris and would like to read more Bloc books, check out [Jottly.](https://www.bloc.io/build-your-first-website-with-html-and-css) Bloc's Jottly book teaches you how to build your very first website using HTML, CSS and the Skeleton framework.
 
 ## Bloc
 
