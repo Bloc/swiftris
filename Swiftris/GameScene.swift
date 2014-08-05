@@ -23,7 +23,7 @@ class GameScene: SKScene {
 
     var textureCache = Dictionary<String, SKTexture>()
 
-    override init(size: CGSize) {
+    init(size: CGSize) {
         super.init(size: size)
         
         anchorPoint = CGPoint(x: 0, y: 1.0)
@@ -45,10 +45,6 @@ class GameScene: SKScene {
         gameLayer.addChild(shapeLayer)
         
         runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
     }
     
     func playSound(sound:String) {
