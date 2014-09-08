@@ -46,8 +46,8 @@ class GameScene: SKScene {
         
         runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
     }
-
-    required init(coder aDecoder: NSCoder!) {
+    
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoder not supported")
     }
     
