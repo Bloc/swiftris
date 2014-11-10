@@ -19,17 +19,17 @@ enum Orientation: Int, Printable {
     }
     
     static func random() -> Orientation {
-        return Orientation.fromRaw(Int(arc4random_uniform(NumOrientations)))!
+        return Orientation(rawValue:Int(arc4random_uniform(NumOrientations)))!
     }
     
     static func rotate(orientation:Orientation, clockwise: Bool) -> Orientation {
-        var rotated = orientation.toRaw() + (clockwise ? 1 : -1)
-        if rotated > Orientation.TwoSeventy.toRaw() {
-            rotated = Orientation.Zero.toRaw()
+        var rotated = orientation.rawValue + (clockwise ? 1 : -1)
+        if rotated > Orientation.TwoSeventy.rawValue {
+            rotated = Orientation.Zero.rawValue
         } else if rotated < 0 {
-            rotated = Orientation.TwoSeventy.toRaw()
+            rotated = Orientation.TwoSeventy.rawValue
         }
-        return Orientation.fromRaw(rotated)!
+        return Orientation(rawValue:rotated)!
     }
 }
 
