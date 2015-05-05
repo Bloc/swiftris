@@ -10,7 +10,9 @@ At [Bloc](https://www.bloc.io/) we offer an [iOS apprenticeship](https://www.blo
 
 ## Swiftris Tech Details
 
-Swiftris is a Tetris clone written entirely in **Swift** which employs **SpriteKit**. The organization of this project is as follows:
+Swiftris is a Tetris clone written entirely in **Swift** which employs **SpriteKit**. It currently builds with Xcode 6.1.1; beta versions of Swift are unsupported.
+
+The organization of this project is as follows:
 
 | **File** | **Purpose** | **Layer** |
 | :---: | --- | :---: |
