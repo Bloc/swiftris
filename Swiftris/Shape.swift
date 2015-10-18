@@ -2,7 +2,7 @@ import SpriteKit
 
 let NumOrientations: UInt32 = 4
 
-enum Orientation: Int, Printable {
+enum Orientation: Int, CustomStringConvertible {
     case Zero = 0, Ninety, OneEighty, TwoSeventy
     
     var description: String {
@@ -42,7 +42,7 @@ let SecondBlockIdx: Int = 1
 let ThirdBlockIdx: Int = 2
 let FourthBlockIdx: Int = 3
 
-class Shape: Hashable, Printable {
+class Shape: Hashable, CustomStringConvertible {
     // The color of the shape
     let color:BlockColor
     
@@ -73,7 +73,7 @@ class Shape: Hashable, Printable {
     
     // Hashable
     var hashValue:Int {
-        return reduce(blocks, 0) { $0.hashValue ^ $1.hashValue }
+        return blocks.reduce(0) { $0.hashValue ^ $1.hashValue }
     }
     
     // Printable
@@ -106,7 +106,7 @@ class Shape: Hashable, Printable {
     
     final func rotateBlocks(orientation: Orientation) {
         if let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] {
-            for (idx, diff) in enumerate(blockRowColumnTranslation) {
+            for (idx, diff) in blockRowColumnTranslation.enumerate() {
                 blocks[idx].column = column + diff.columnDiff
                 blocks[idx].row = row + diff.rowDiff
             }
