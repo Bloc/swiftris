@@ -10,7 +10,7 @@ import SpriteKit
 
 let NumberOfColors: UInt32 = 6
 
-enum BlockColor: Int, Printable {
+enum BlockColor: Int, CustomStringConvertible {
     
     case Blue = 0, Orange, Purple, Red, Teal, Yellow
     
@@ -40,7 +40,7 @@ enum BlockColor: Int, Printable {
     }
 }
 
-class Block: Hashable, Printable {
+class Block: Hashable, CustomStringConvertible {
     // Constants
     let color: BlockColor
     

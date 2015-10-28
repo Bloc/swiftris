@@ -60,7 +60,7 @@ class GameScene: SKScene {
         if lastTick == nil {
             return
         }
-        var timePassed = lastTick!.timeIntervalSinceNow * -1000.0
+        let timePassed = lastTick!.timeIntervalSinceNow * -1000.0
         if timePassed > tickLengthMillis {
             lastTick = NSDate()
             tick?()
@@ -82,7 +82,7 @@ class GameScene: SKScene {
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
-        for (idx, block) in enumerate(shape.blocks) {
+        for (idx, block) in shape.blocks.enumerate() {
             var texture = textureCache[block.spriteName]
             if texture == nil {
                 texture = SKTexture(imageNamed: block.spriteName)
@@ -105,7 +105,7 @@ class GameScene: SKScene {
     }
     
     func movePreviewShape(shape:Shape, completion:() -> ()) {
-        for (idx, block) in enumerate(shape.blocks) {
+        for (idx, block) in shape.blocks.enumerate() {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction = SKAction.moveTo(moveTo, duration: 0.2)
@@ -118,7 +118,7 @@ class GameScene: SKScene {
     }
     
     func redrawShape(shape:Shape, completion:() -> ()) {
-        for (idx, block) in enumerate(shape.blocks) {
+        for (idx, block) in shape.blocks.enumerate() {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
@@ -131,8 +131,8 @@ class GameScene: SKScene {
     func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion:() -> ()) {
         var longestDuration: NSTimeInterval = 0
         
-        for (columnIdx, column) in enumerate(fallenBlocks) {
-            for (blockIdx, block) in enumerate(column) {
+        for (columnIdx, column) in fallenBlocks.enumerate() {
+            for (blockIdx, block) in column.enumerate() {
                 let newPosition = pointForColumn(block.column, row: block.row)
                 let sprite = block.sprite!
                 let delay = (NSTimeInterval(columnIdx) * 0.05) + (NSTimeInterval(blockIdx) * 0.05)
@@ -147,8 +147,8 @@ class GameScene: SKScene {
             }
         }
         
-        for (rowIdx, row) in enumerate(linesToRemove) {
-            for (blockIdx, block) in enumerate(row) {
+        for (rowIdx, row) in linesToRemove.enumerate() {
+            for (blockIdx, block) in row.enumerate() {
                 let randomRadius = CGFloat(UInt(arc4random_uniform(400) + 100))
                 let goLeft = arc4random_uniform(100) % 2 == 0
                 
