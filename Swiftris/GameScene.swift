@@ -82,7 +82,7 @@ class GameScene: SKScene {
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
-        for (_, block) in shape.blocks.enumerate() {
+        for block in shape.blocks {
             var texture = textureCache[block.spriteName]
             if texture == nil {
                 texture = SKTexture(imageNamed: block.spriteName)
