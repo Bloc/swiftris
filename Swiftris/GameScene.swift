@@ -82,7 +82,7 @@ class GameScene: SKScene {
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
-        for (idx, block) in shape.blocks.enumerate() {
+        for (_, block) in shape.blocks.enumerate() {
             var texture = textureCache[block.spriteName]
             if texture == nil {
                 texture = SKTexture(imageNamed: block.spriteName)
@@ -105,7 +105,7 @@ class GameScene: SKScene {
     }
     
     func movePreviewShape(shape:Shape, completion:() -> ()) {
-        for (idx, block) in shape.blocks.enumerate() {
+        for block in shape.blocks {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction = SKAction.moveTo(moveTo, duration: 0.2)
@@ -118,7 +118,7 @@ class GameScene: SKScene {
     }
     
     func redrawShape(shape:Shape, completion:() -> ()) {
-        for (idx, block) in shape.blocks.enumerate() {
+        for block in shape.blocks {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
@@ -147,8 +147,8 @@ class GameScene: SKScene {
             }
         }
         
-        for (rowIdx, row) in linesToRemove.enumerate() {
-            for (blockIdx, block) in row.enumerate() {
+        for rowToRemove in linesToRemove {
+            for block in rowToRemove {
                 let randomRadius = CGFloat(UInt(arc4random_uniform(400) + 100))
                 let goLeft = arc4random_uniform(100) % 2 == 0
                 

@@ -73,12 +73,12 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let swipeRec = gestureRecognizer as? UISwipeGestureRecognizer {
-            if let panRec = otherGestureRecognizer as? UIPanGestureRecognizer {
+        if gestureRecognizer is UISwipeGestureRecognizer {
+            if otherGestureRecognizer is UIPanGestureRecognizer {
                 return true
             }
-        } else if let panRec = gestureRecognizer as? UIPanGestureRecognizer {
-            if let tapRec = otherGestureRecognizer as? UITapGestureRecognizer {
+        } else if gestureRecognizer is UIPanGestureRecognizer {
+            if otherGestureRecognizer is UITapGestureRecognizer {
                 return true
             }
         }
