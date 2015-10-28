@@ -84,8 +84,8 @@ class Swiftris {
     func detectTouch() -> Bool {
         if let shape = fallingShape {
             for bottomBlock in shape.bottomBlocks {
-                if bottomBlock.row == NumRows - 1 ||
-                    blockArray[bottomBlock.column, bottomBlock.row + 1] != nil {
+                if bottomBlock.row == NumRows - 1
+                    || blockArray[bottomBlock.column, bottomBlock.row + 1] != nil {
                         return true
                 }
             }

@@ -123,9 +123,12 @@ class GameScene: SKScene {
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
-            sprite.runAction(moveToAction)
+            if block == shape.blocks.last {
+                sprite.runAction(moveToAction, completion: completion)
+            } else {
+                sprite.runAction(moveToAction)
+            }
         }
-        runAction(SKAction.waitForDuration(0.05), completion: completion)
     }
     
     func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion:() -> ()) {
