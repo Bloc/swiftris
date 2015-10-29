@@ -57,12 +57,12 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if lastTick == nil {
+        guard let lastTick = lastTick else {
             return
         }
-        let timePassed = lastTick!.timeIntervalSinceNow * -1000.0
+        let timePassed = lastTick.timeIntervalSinceNow * -1000.0
         if timePassed > tickLengthMillis {
-            lastTick = NSDate()
+            self.lastTick = NSDate()
             tick?()
         }
     }
