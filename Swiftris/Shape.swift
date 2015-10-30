@@ -65,10 +65,10 @@ class Shape: Hashable, CustomStringConvertible {
     }
     
     var bottomBlocks:Array<Block> {
-        if let bottomBlocks = bottomBlocksForOrientations[orientation] {
-            return bottomBlocks
+        guard let bottomBlocks = bottomBlocksForOrientations[orientation] else {
+            return []
         }
-        return []
+        return bottomBlocks
     }
     
     // Hashable
@@ -94,22 +94,21 @@ class Shape: Hashable, CustomStringConvertible {
     }
     
     final func initializeBlocks() {
-        if let blockRowColumnTranslations = blockRowColumnPositions[orientation] {
-            for i in 0..<blockRowColumnTranslations.count {
-                let blockRow = row + blockRowColumnTranslations[i].rowDiff
-                let blockColumn = column + blockRowColumnTranslations[i].columnDiff
-                let newBlock = Block(column: blockColumn, row: blockRow, color: color)
-                blocks.append(newBlock)
-            }
+        guard let blockRowColumnTranslations = blockRowColumnPositions[orientation] else {
+            return
+        }
+        blocks = blockRowColumnTranslations.map { (diff) -> Block in
+            return Block(column: column + diff.columnDiff, row: row + diff.rowDiff, color: color)
         }
     }
     
     final func rotateBlocks(orientation: Orientation) {
-        if let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] {
-            for (idx, diff) in blockRowColumnTranslation.enumerate() {
-                blocks[idx].column = column + diff.columnDiff
-                blocks[idx].row = row + diff.rowDiff
-            }
+        guard let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] else {
+            return
+        }
+        for (idx, diff) in blockRowColumnTranslation.enumerate() {
+            blocks[idx].column = column + diff.columnDiff
+            blocks[idx].row = row + diff.rowDiff
         }
     }
     

@@ -91,12 +91,13 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     func nextShape() {
         let newShapes = swiftris.newShape()
-        if let fallingShape = newShapes.fallingShape {
-            self.scene.addPreviewShapeToScene(newShapes.nextShape!) {}
-            self.scene.movePreviewShape(fallingShape) {
-                self.view.userInteractionEnabled = true
-                self.scene.startTicking()
-            }
+        guard let fallingShape = newShapes.fallingShape else {
+            return
+        }
+        self.scene.addPreviewShapeToScene(newShapes.nextShape!) {}
+        self.scene.movePreviewShape(fallingShape) {
+            self.view.userInteractionEnabled = true
+            self.scene.startTicking()
         }
     }
     
