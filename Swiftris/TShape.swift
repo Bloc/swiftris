@@ -1,3 +1,7 @@
+
+
+
+
 class TShape:Shape {
     /*
     Orientation 0
