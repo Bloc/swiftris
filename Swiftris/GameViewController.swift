@@ -23,7 +23,7 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         super.viewDidLoad()
         
         // Configure the view.
-        let skView = view as SKView
+        let skView = view as! SKView
         skView.multipleTouchEnabled = false
         
         // Create and configure the scene.
@@ -68,17 +68,17 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
         swiftris.dropShape()
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer!, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer!) -> Bool {
-        if let swipeRec = gestureRecognizer as? UISwipeGestureRecognizer {
-            if let panRec = otherGestureRecognizer as? UIPanGestureRecognizer {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailByGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer is UISwipeGestureRecognizer {
+            if otherGestureRecognizer is UIPanGestureRecognizer {
                 return true
             }
-        } else if let panRec = gestureRecognizer as? UIPanGestureRecognizer {
-            if let tapRec = otherGestureRecognizer as? UITapGestureRecognizer {
+        } else if gestureRecognizer is UIPanGestureRecognizer {
+            if otherGestureRecognizer is UITapGestureRecognizer {
                 return true
             }
         }
@@ -91,12 +91,13 @@ class GameViewController: UIViewController, SwiftrisDelegate, UIGestureRecognize
     
     func nextShape() {
         let newShapes = swiftris.newShape()
-        if let fallingShape = newShapes.fallingShape {
-            self.scene.addPreviewShapeToScene(newShapes.nextShape!) {}
-            self.scene.movePreviewShape(fallingShape) {
-                self.view.userInteractionEnabled = true
-                self.scene.startTicking()
-            }
+        guard let fallingShape = newShapes.fallingShape else {
+            return
+        }
+        self.scene.addPreviewShapeToScene(newShapes.nextShape!) {}
+        self.scene.movePreviewShape(fallingShape) {
+            self.view.userInteractionEnabled = true
+            self.scene.startTicking()
         }
     }
     

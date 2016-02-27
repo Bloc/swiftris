@@ -1,8 +1,8 @@
 ## Swiftris: Build Your First iOS Game With Swift
 
-<center>[![](https://d1rn32hddkla48.cloudfront.net/assets/books/swiftris/whatyoubuild-b21c6fc044aa028515f362037954068a.gif)](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift)</center>
+[![](https://cdn1.bloc.io/assets/books/swiftris/transparent-iphone-32de456de6ee2d9c0ca3dad20b95acbd.gif)](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift)
 
-This repository maintains the completed source code indicative of the project you may build yourself by completing the [Bloc's Swiftris book](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift). If you enjoyed Swiftris and would like to read more Bloc books, check out [Jottly.](https://www.bloc.io/build-your-first-website-with-html-and-css) Bloc's Jottly book teaches you how to build your very first website using HTML, CSS and the Skeleton framework.
+This repository maintains the completed source code indicative of the project you may build yourself by completing [Bloc's Swiftris book](https://www.bloc.io/swiftris-build-your-first-ios-game-with-swift). If you enjoyed Swiftris and would like to read more Bloc books, check out [Jottly.](https://www.bloc.io/build-your-first-website-with-html-and-css) Bloc's Jottly book teaches you how to build your very first website using HTML, CSS and the Skeleton framework.
 
 ## Bloc
 
@@ -10,7 +10,9 @@ At [Bloc](https://www.bloc.io/) we offer an [iOS apprenticeship](https://www.blo
 
 ## Swiftris Tech Details
 
-Swiftris is a Tetris clone written entirely in **Swift** which employs **SpriteKit**. The organization of this project is as follows:
+Swiftris is a Tetris clone written entirely in **Swift** which employs **SpriteKit**. It currently builds with Xcode 6.1.1; beta versions of Swift are unsupported.
+
+The organization of this project is as follows:
 
 | **File** | **Purpose** | **Layer** |
 | :---: | --- | :---: |

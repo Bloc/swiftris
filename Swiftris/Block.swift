@@ -10,7 +10,7 @@ import SpriteKit
 
 let NumberOfColors: UInt32 = 6
 
-enum BlockColor: Int, Printable {
+enum BlockColor: Int, CustomStringConvertible {
     
     case Blue = 0, Orange, Purple, Red, Teal, Yellow
     
@@ -36,11 +36,11 @@ enum BlockColor: Int, Printable {
     }
     
     static func random() -> BlockColor {
-        return BlockColor.fromRaw(Int(arc4random_uniform(NumberOfColors)))!
+        return BlockColor(rawValue:Int(arc4random_uniform(NumberOfColors)))!
     }
 }
 
-class Block: Hashable, Printable {
+class Block: Hashable, CustomStringConvertible {
     // Constants
     let color: BlockColor
     
@@ -71,5 +71,5 @@ class Block: Hashable, Printable {
 }
 
 func ==(lhs: Block, rhs: Block) -> Bool {
-    return lhs.column == rhs.column && lhs.row == rhs.row && lhs.color.toRaw() == rhs.color.toRaw()
+    return lhs.column == rhs.column && lhs.row == rhs.row && lhs.color.rawValue == rhs.color.rawValue
 }

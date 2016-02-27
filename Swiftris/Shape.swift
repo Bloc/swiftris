@@ -2,7 +2,7 @@ import SpriteKit
 
 let NumOrientations: UInt32 = 4
 
-enum Orientation: Int, Printable {
+enum Orientation: Int, CustomStringConvertible {
     case Zero = 0, Ninety, OneEighty, TwoSeventy
     
     var description: String {
@@ -19,17 +19,17 @@ enum Orientation: Int, Printable {
     }
     
     static func random() -> Orientation {
-        return Orientation.fromRaw(Int(arc4random_uniform(NumOrientations)))!
+        return Orientation(rawValue:Int(arc4random_uniform(NumOrientations)))!
     }
     
     static func rotate(orientation:Orientation, clockwise: Bool) -> Orientation {
-        var rotated = orientation.toRaw() + (clockwise ? 1 : -1)
-        if rotated > Orientation.TwoSeventy.toRaw() {
-            rotated = Orientation.Zero.toRaw()
+        var rotated = orientation.rawValue + (clockwise ? 1 : -1)
+        if rotated > Orientation.TwoSeventy.rawValue {
+            rotated = Orientation.Zero.rawValue
         } else if rotated < 0 {
-            rotated = Orientation.TwoSeventy.toRaw()
+            rotated = Orientation.TwoSeventy.rawValue
         }
-        return Orientation.fromRaw(rotated)!
+        return Orientation(rawValue:rotated)!
     }
 }
 
@@ -42,7 +42,7 @@ let SecondBlockIdx: Int = 1
 let ThirdBlockIdx: Int = 2
 let FourthBlockIdx: Int = 3
 
-class Shape: Hashable, Printable {
+class Shape: Hashable, CustomStringConvertible {
     // The color of the shape
     let color:BlockColor
     
@@ -65,15 +65,15 @@ class Shape: Hashable, Printable {
     }
     
     var bottomBlocks:Array<Block> {
-        if let bottomBlocks = bottomBlocksForOrientations[orientation] {
-            return bottomBlocks
+        guard let bottomBlocks = bottomBlocksForOrientations[orientation] else {
+            return []
         }
-        return []
+        return bottomBlocks
     }
     
     // Hashable
     var hashValue:Int {
-        return reduce(blocks, 0) { $0.hashValue ^ $1.hashValue }
+        return blocks.reduce(0) { $0.hashValue ^ $1.hashValue }
     }
     
     // Printable
@@ -94,22 +94,21 @@ class Shape: Hashable, Printable {
     }
     
     final func initializeBlocks() {
-        if let blockRowColumnTranslations = blockRowColumnPositions[orientation] {
-            for i in 0..<blockRowColumnTranslations.count {
-                let blockRow = row + blockRowColumnTranslations[i].rowDiff
-                let blockColumn = column + blockRowColumnTranslations[i].columnDiff
-                let newBlock = Block(column: blockColumn, row: blockRow, color: color)
-                blocks.append(newBlock)
-            }
+        guard let blockRowColumnTranslations = blockRowColumnPositions[orientation] else {
+            return
+        }
+        blocks = blockRowColumnTranslations.map { (diff) -> Block in
+            return Block(column: column + diff.columnDiff, row: row + diff.rowDiff, color: color)
         }
     }
     
     final func rotateBlocks(orientation: Orientation) {
-        if let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] {
-            for (idx, (columnDiff:Int, rowDiff:Int)) in enumerate(blockRowColumnTranslation) {
-                blocks[idx].column = column + columnDiff
-                blocks[idx].row = row + rowDiff
-            }
+        guard let blockRowColumnTranslation:Array<(columnDiff: Int, rowDiff: Int)> = blockRowColumnPositions[orientation] else {
+            return
+        }
+        for (idx, diff) in blockRowColumnTranslation.enumerate() {
+            blocks[idx].column = column + diff.columnDiff
+            blocks[idx].row = row + diff.rowDiff
         }
     }
     

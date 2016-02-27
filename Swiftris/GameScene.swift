@@ -46,8 +46,8 @@ class GameScene: SKScene {
         
         runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("theme.mp3", waitForCompletion: true)))
     }
-
-    required init(coder aDecoder: NSCoder!) {
+    
+    required init(coder aDecoder: NSCoder) {
         fatalError("NSCoder not supported")
     }
     
@@ -57,18 +57,18 @@ class GameScene: SKScene {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if lastTick == nil {
+        guard let lastTick = lastTick else {
             return
         }
-        var timePassed = lastTick!.timeIntervalSinceNow * -1000.0
+        let timePassed = lastTick.timeIntervalSinceNow * -1000.0
         if timePassed > tickLengthMillis {
-            lastTick = NSDate.date()
+            self.lastTick = NSDate()
             tick?()
         }
     }
     
     func startTicking() {
-        lastTick = NSDate.date()
+        lastTick = NSDate()
     }
     
     func stopTicking() {
@@ -76,13 +76,13 @@ class GameScene: SKScene {
     }
     
     func pointForColumn(column: Int, row: Int) -> CGPoint {
-        let x: CGFloat = LayerPosition.x + (CGFloat(column) * BlockSize) + (BlockSize / 2)
-        let y: CGFloat = LayerPosition.y - ((CGFloat(row) * BlockSize) + (BlockSize / 2))
+        let x = LayerPosition.x + (CGFloat(column) * BlockSize) + (BlockSize / 2)
+        let y = LayerPosition.y - ((CGFloat(row) * BlockSize) + (BlockSize / 2))
         return CGPointMake(x, y)
     }
     
     func addPreviewShapeToScene(shape:Shape, completion:() -> ()) {
-        for (idx, block) in enumerate(shape.blocks) {
+        for block in shape.blocks {
             var texture = textureCache[block.spriteName]
             if texture == nil {
                 texture = SKTexture(imageNamed: block.spriteName)
@@ -105,7 +105,7 @@ class GameScene: SKScene {
     }
     
     func movePreviewShape(shape:Shape, completion:() -> ()) {
-        for (idx, block) in enumerate(shape.blocks) {
+        for block in shape.blocks {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction = SKAction.moveTo(moveTo, duration: 0.2)
@@ -118,21 +118,24 @@ class GameScene: SKScene {
     }
     
     func redrawShape(shape:Shape, completion:() -> ()) {
-        for (idx, block) in enumerate(shape.blocks) {
+        for block in shape.blocks {
             let sprite = block.sprite!
             let moveTo = pointForColumn(block.column, row:block.row)
             let moveToAction:SKAction = SKAction.moveTo(moveTo, duration: 0.05)
             moveToAction.timingMode = .EaseOut
-            sprite.runAction(moveToAction)
+            if block == shape.blocks.last {
+                sprite.runAction(moveToAction, completion: completion)
+            } else {
+                sprite.runAction(moveToAction)
+            }
         }
-        runAction(SKAction.waitForDuration(0.05), completion: completion)
     }
     
     func animateCollapsingLines(linesToRemove: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>, completion:() -> ()) {
         var longestDuration: NSTimeInterval = 0
         
-        for (columnIdx, column) in enumerate(fallenBlocks) {
-            for (blockIdx, block) in enumerate(column) {
+        for (columnIdx, column) in fallenBlocks.enumerate() {
+            for (blockIdx, block) in column.enumerate() {
                 let newPosition = pointForColumn(block.column, row: block.row)
                 let sprite = block.sprite!
                 let delay = (NSTimeInterval(columnIdx) * 0.05) + (NSTimeInterval(blockIdx) * 0.05)
@@ -147,8 +150,8 @@ class GameScene: SKScene {
             }
         }
         
-        for (rowIdx, row) in enumerate(linesToRemove) {
-            for (blockIdx, block) in enumerate(row) {
+        for rowToRemove in linesToRemove {
+            for block in rowToRemove {
                 let randomRadius = CGFloat(UInt(arc4random_uniform(400) + 100))
                 let goLeft = arc4random_uniform(100) % 2 == 0
                 
