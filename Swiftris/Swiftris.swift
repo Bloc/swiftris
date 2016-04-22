@@ -8,7 +8,7 @@ let PreviewColumn = 12
 let PreviewRow = 1
 
 let PointsPerLine = 10
-let LevelThreshold = 1000
+let LevelThreshold = 500
 
 protocol SwiftrisDelegate {
     func gameDidEnd(swiftris: Swiftris)
@@ -118,7 +118,7 @@ class Swiftris {
     
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
         var removedLines = Array<Array<Block>>()
-        for var row = NumRows - 1; row > 0; row-- {
+        for row in (1..<NumRows).reverse() {
             var rowOfBlocks = Array<Block>()
             for column in 0..<NumColumns {
                 guard let block = blockArray[column, row] else {
@@ -147,13 +147,13 @@ class Swiftris {
         var fallenBlocks = Array<Array<Block>>()
         for column in 0..<NumColumns {
             var fallenBlocksArray = Array<Block>()
-            for var row = removedLines[0][0].row - 1; row > 0; row-- {
+            for row in (1..<removedLines[0][0].row).reverse() {
                 guard let block = blockArray[column, row] else {
                     continue
                 }
                 var newRow = row
                 while (newRow < NumRows - 1 && blockArray[column, newRow + 1] == nil) {
-                    newRow++
+                    newRow += 1
                 }
                 block.row = newRow
                 blockArray[column, row] = nil
