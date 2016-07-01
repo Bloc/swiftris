@@ -14,7 +14,7 @@ class Array2D<T> {
     init(columns: Int, rows: Int) {
         self.columns = columns
         self.rows = rows
-        array = Array<T?>(count:rows * columns, repeatedValue: nil)
+        array = Array<T?>(repeating: nil, count: rows * columns)
     }
     
     subscript(column: Int, row: Int) -> T? {
