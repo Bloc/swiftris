@@ -12,21 +12,21 @@ let NumberOfColors: UInt32 = 6
 
 enum BlockColor: Int, CustomStringConvertible {
     
-    case Blue = 0, Orange, Purple, Red, Teal, Yellow
+    case blue = 0, orange, purple, red, teal, yellow
     
     var spriteName: String {
     switch self {
-    case .Blue:
+    case .blue:
         return "blue"
-    case .Orange:
+    case .orange:
         return "orange"
-    case .Purple:
+    case .purple:
         return "purple"
-    case .Red:
+    case .red:
         return "red"
-    case .Teal:
+    case .teal:
         return "teal"
-    case .Yellow:
+    case .yellow:
         return "yellow"
         }
     }
