@@ -11,12 +11,12 @@ let PointsPerLine = 10
 let LevelThreshold = 500
 
 protocol SwiftrisDelegate {
-    func gameDidEnd(swiftris: Swiftris)
-    func gameDidBegin(swiftris: Swiftris)
-    func gameShapeDidLand(swiftris: Swiftris)
-    func gameShapeDidMove(swiftris: Swiftris)
-    func gameShapeDidDrop(swiftris: Swiftris)
-    func gameDidLevelUp(swiftris: Swiftris)
+    func gameDidEnd(_ swiftris: Swiftris)
+    func gameDidBegin(_ swiftris: Swiftris)
+    func gameShapeDidLand(_ swiftris: Swiftris)
+    func gameShapeDidMove(_ swiftris: Swiftris)
+    func gameShapeDidDrop(_ swiftris: Swiftris)
+    func gameDidLevelUp(_ swiftris: Swiftris)
 }
 
 class Swiftris {
@@ -118,7 +118,7 @@ class Swiftris {
     
     func removeCompletedLines() -> (linesRemoved: Array<Array<Block>>, fallenBlocks: Array<Array<Block>>) {
         var removedLines = Array<Array<Block>>()
-        for row in (1..<NumRows).reverse() {
+        for row in (1..<NumRows).reversed() {
             var rowOfBlocks = Array<Block>()
             for column in 0..<NumColumns {
                 guard let block = blockArray[column, row] else {
@@ -147,7 +147,7 @@ class Swiftris {
         var fallenBlocks = Array<Array<Block>>()
         for column in 0..<NumColumns {
             var fallenBlocksArray = Array<Block>()
-            for row in (1..<removedLines[0][0].row).reverse() {
+            for row in (1..<removedLines[0][0].row).reversed() {
                 guard let block = blockArray[column, row] else {
                     continue
                 }
