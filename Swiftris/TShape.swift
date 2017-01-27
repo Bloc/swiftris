@@ -1,3 +1,7 @@
+
+
+
+
 class TShape:Shape {
     /*
     Orientation 0
@@ -33,6 +37,7 @@ class TShape:Shape {
             Orientation.Ninety:     [(2, 1), (1, 0), (1, 1), (1, 2)],
             Orientation.OneEighty:  [(1, 2), (0, 1), (1, 1), (2, 1)],
             Orientation.TwoSeventy: [(0, 1), (1, 0), (1, 1), (1, 2)]
+            // a comment
         ]
     }
     
